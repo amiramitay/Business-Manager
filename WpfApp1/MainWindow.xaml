@@ -1,0 +1,82 @@
+﻿<Window x:Name="MainForm" x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="Business Manager" Height="600" Width="1000" Background="White" SizeChanged="Window_SizeChanged" MinWidth="800" MinHeight="450">
+    <Grid Background="#FF8D8080">
+
+        <DockPanel x:Name="Leftpanel" HorizontalAlignment="Left"  Height="auto" LastChildFill="False" Margin="0,32,0,-0.333" Width="160" Grid.ColumnSpan="2" Background="#FFBCCAD6"/>
+
+        <DockPanel x:Name="RightPanel" HorizontalAlignment="Right" Height="auto" LastChildFill="False" Margin="620,32,0,-0.333" Width="173" Grid.Column="1" Background="#FFBCCAD6">
+            <Calendar x:Name="MainCal" Height="389" Margin="4,-6,-3.667,5.667" DockPanel.Dock="Top"/>
+
+        </DockPanel>
+        <Menu x:Name="MainMenu" Height="32" VerticalAlignment="Top" Width="auto" HorizontalContentAlignment="Stretch" Margin="0,0,0.333,0" Background="#FF667292" Grid.ColumnSpan="2" BorderBrush="#FFBCCAD6" >
+            <MenuItem x:Name="CustomersBtn" Header="Customers" IsCheckable="True" Height="31">
+                <Button Content="Connect"/>
+                <Button Content="Change User"/>
+            </MenuItem>
+            <MenuItem x:Name="WorkersBtn" Header="Workers" IsCheckable="True"/>
+            <MenuItem x:Name="SalesBtn" Header="Sales" IsCheckable="True"/>
+            <MenuItem x:Name="ProviderBtn" Header="Provider" IsCheckable="True"/>
+            <MenuItem x:Name="SalesBtn1" Header="Sales" IsCheckable="True"/>
+        </Menu>
+        <Grid HorizontalAlignment="Left" Height="100" Margin="164,128,0,0" VerticalAlignment="Top" Width="0" Grid.Column="1"/>
+        <DockPanel x:Name="centerpanel" Height="auto" Width="auto" LastChildFill="true" Margin="155,32,158.333,-0.333" RenderTransformOrigin="-0.14,-0.127" Grid.Column="1" Background="#FFF1E3DD">
+            <TabControl Background="#FFF1E3DD">
+                <TabItem x:Name="LoginTab" Header="Login" Margin="-5,-5,0.333,0">
+                    <TabItem.Background>
+                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                            <GradientStop Color="#FF8D9DB6" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TabItem.Background>
+                    <Grid Background="#FFF1E3DD">
+                        <Grid Height="500" Margin="50,10" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500">
+                            <Button x:Name="RegisterBtn" Content="Register" HorizontalAlignment="Left" Margin="270,278,0,0" VerticalAlignment="Top" Width="75"/>
+                            <Button x:Name="LoginBtn" Content="Login" HorizontalAlignment="Left" Margin="134,278,0,0" VerticalAlignment="Top" Width="75"/>
+                            <Label Content="User Name" HorizontalAlignment="Left" Margin="134,173,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Password" HorizontalAlignment="Left" Margin="134,225,0,0" VerticalAlignment="Top"/>
+                            <TextBox HorizontalAlignment="Left" Height="23" Margin="223,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                            <PasswordBox HorizontalAlignment="Left" Margin="221,230,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
+                        </Grid>
+
+
+
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="CustomersInfoTab" Header="Customers Info" Margin="-5,-5,0.333,0">
+                    <TabItem.Background>
+                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                            <GradientStop Color="#FFB7D7E8" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TabItem.Background>
+                    <Grid/>
+                </TabItem>
+                <TabItem x:Name="SalesTab" Header="Sales" Margin="-5,-5,0.333,0">
+                    <TabItem.Background>
+                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                            <GradientStop Color="#FFDAEBE8" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TabItem.Background>
+                    <Grid/>
+                </TabItem>
+                <TabItem x:Name="WorkersInfoTab" Header="Workers Info" Margin="-5,-5,0.333,0">
+                    <TabItem.Background>
+                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                            <GradientStop Color="#FFFBEFCC" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TabItem.Background>
+                    <Grid/>
+                </TabItem>
+            </TabControl>
+        </DockPanel>
+
+    </Grid>
+</Window>
