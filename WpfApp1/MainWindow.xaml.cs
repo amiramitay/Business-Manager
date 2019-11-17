@@ -20,26 +20,30 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        public List<Worker> workersInfo { get; set; }
         public MainWindow()
         {
+
             InitializeComponent();
-            var workersInfo = new List<Worker>();
+
+            workersInfo=new List<Worker>();
             Worker a = new Worker();
             a.FirstName = "Amir";
             a.LastName = "Amitay";
             a.Phone = "0541111111";
-
-            Worker b = new Worker();
-            b.FirstName = "Amir";
-            b.LastName = "Amitay";
-            b.Phone = "0541111111";
-
-            Worker c = new Worker();
-            c.FirstName = "Amir";
-            c.LastName = "Amitay";
-            c.Phone = "0541111111";
+            DateTime date = new DateTime(1993, 3, 30).Date;
+          //  MessageBox.Show(date.Date.ToString("MM/dd/yyyy"));
+            a.DateOfBirth = date.Date;
+            workersInfo.Add(a);
+          //  WorkerInfoTable.Columns[1].HeaderStringFormat = "HH:mm:ss";//DefaultCellStyle.Format = "HH:mm:ss";
+            WorkerInfoTable.ItemsSource = workersInfo;
+       //     WorkerInfoTable.Columns[3].HeaderStringFormat= "HH:mm:ss";
+                
 
         }
 
+  
     }
 }
+
+

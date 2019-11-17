@@ -10,7 +10,7 @@
 
         <DockPanel x:Name="Leftpanel" HorizontalAlignment="Left"  Height="auto" LastChildFill="False" Margin="0,32,0,-0.333" Width="160" Grid.ColumnSpan="2" Background="#FFBCCAD6"/>
 
-        <DockPanel x:Name="RightPanel" HorizontalAlignment="Right" Height="auto" LastChildFill="False" Margin="620,32,0,-0.333" Width="173" Grid.Column="1" Background="#FFBCCAD6">
+        <DockPanel x:Name="RightPanel" HorizontalAlignment="Right" Height="auto" LastChildFill="False" Margin="620,32,0,-0.333" Width="173" Grid.Column="1" Background="#FFBCCAD6" Grid.RowSpan="2" Grid.ColumnSpan="2">
             <Calendar x:Name="MainCal" Height="389" Margin="4,-6,-3.667,5.667" DockPanel.Dock="Top"/>
 
         </DockPanel>
@@ -26,7 +26,7 @@
         </Menu>
         <Grid HorizontalAlignment="Left" Height="100" Margin="164,128,0,0" VerticalAlignment="Top" Width="0" Grid.Column="1"/>
         <DockPanel x:Name="centerpanel" Height="auto" Width="auto" LastChildFill="true" Margin="155,32,158.333,-0.333" RenderTransformOrigin="-0.14,-0.127" Grid.Column="1" Background="#FFF1E3DD">
-            <TabControl Background="#FFF1E3DD">
+            <TabControl x:Name="mainTabs" Background="#FFF1E3DD">
                 <TabItem x:Name="LoginTab" Header="Login" Margin="-5,-5,0.333,0">
                     <TabItem.Background>
                         <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -48,7 +48,7 @@
 
                     </Grid>
                 </TabItem>
-                <TabItem x:Name="CustomersInfoTab" Header="Customers Info" Margin="-5,-5,0.333,0">
+                <TabItem x:Name="CustomersInfoTab" Header="Customers Info" Margin="-5,-5,0.333,0" >
                     <TabItem.Background>
                         <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                             <GradientStop Color="#FFF0F0F0" Offset="0"/>
@@ -56,7 +56,7 @@
                         </LinearGradientBrush>
                     </TabItem.Background>
                     <Grid>
-                        
+
                     </Grid>
                 </TabItem>
                 <TabItem x:Name="SalesTab" Header="Sales" Margin="-5,-5,0.333,0">
@@ -68,7 +68,7 @@
                     </TabItem.Background>
                     <Grid/>
                 </TabItem>
-                <TabItem x:Name="WorkersInfoTab" Header="Workers Info" Margin="-5,-5,0.333,0">
+                <TabItem x:Name="WorkersInfoTab" Header="Workers Info" Margin="-4.667,-5,0,0.333" HorizontalAlignment="Right" Width="84">
                     <TabItem.Background>
                         <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                             <GradientStop Color="#FFF0F0F0" Offset="0"/>
@@ -76,7 +76,15 @@
                         </LinearGradientBrush>
                     </TabItem.Background>
                     <Grid>
-                        <DataGrid ItemsSource="{Binding workersInfo}"/>
+
+
+                        <Grid Height="390" Background="#FFE11818" Margin="0,0,0.333,0" VerticalAlignment="Top"/>
+                        <DataGrid x:Name = "WorkerInfoTable" Width="auto" Height="390" AlternatingRowBackground = "#FFBCCAD6" ItemsSource="{Binding workersInfo}" Panel.ZIndex="1000" VerticalAlignment="Top" HorizontalAlignment="Left" CanUserResizeColumns="False">
+                       
+
+                        </DataGrid>
+
+
                     </Grid>
                 </TabItem>
                 <TabItem x:Name="WorkersHours" Header="Workers Hours" Margin="-5,-5,0.333,0">
