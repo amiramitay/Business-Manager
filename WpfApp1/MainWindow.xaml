@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="Business Manager" Height="600" Width="1000" Background="White" SizeChanged="Window_SizeChanged" MinWidth="800" MinHeight="450">
+        Title="Business Manager" Height="600" Width="1000" Background="White"  MinWidth="800" MinHeight="450">
     <Grid Background="#FF8D8080">
 
         <DockPanel x:Name="Leftpanel" HorizontalAlignment="Left"  Height="auto" LastChildFill="False" Margin="0,32,0,-0.333" Width="160" Grid.ColumnSpan="2" Background="#FFBCCAD6"/>
@@ -55,7 +55,9 @@
                             <GradientStop Color="#FFB7D7E8" Offset="1"/>
                         </LinearGradientBrush>
                     </TabItem.Background>
-                    <Grid/>
+                    <Grid>
+                        
+                    </Grid>
                 </TabItem>
                 <TabItem x:Name="SalesTab" Header="Sales" Margin="-5,-5,0.333,0">
                     <TabItem.Background>
@@ -73,8 +75,20 @@
                             <GradientStop Color="#FFFBEFCC" Offset="1"/>
                         </LinearGradientBrush>
                     </TabItem.Background>
+                    <Grid>
+                        <DataGrid ItemsSource="{Binding workersInfo}"/>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="WorkersHours" Header="Workers Hours" Margin="-5,-5,0.333,0">
+                    <TabItem.Background>
+                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                            <GradientStop Color="#FFFBEFCC" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TabItem.Background>
                     <Grid/>
                 </TabItem>
+
             </TabControl>
         </DockPanel>
 

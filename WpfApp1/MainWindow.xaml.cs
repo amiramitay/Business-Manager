@@ -23,24 +23,23 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
-           // maintabs.Height = centerpanel.Height;
-            //ntabs.Width = centerpanel.Width;
-           
-            // maintabs.Width = centerpanel.Width;
-            //maintabs.Width *= 2;
-            
-            //  agrid.Width = centerpanel.Width * 2;
-        }
+            var workersInfo = new List<Worker>();
+            Worker a = new Worker();
+            a.FirstName = "Amir";
+            a.LastName = "Amitay";
+            a.Phone = "0541111111";
 
-        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            // MessageBox.Show(centerpanel.Height.ToString());
-            // maintabs.Width *= 2;
-            //if (MainForm.ActualWidth > 800)
-            //ntabs.Width *= 2;
+            Worker b = new Worker();
+            b.FirstName = "Amir";
+            b.LastName = "Amitay";
+            b.Phone = "0541111111";
 
-
+            Worker c = new Worker();
+            c.FirstName = "Amir";
+            c.LastName = "Amitay";
+            c.Phone = "0541111111";
 
         }
+
     }
 }
