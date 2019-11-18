@@ -5,13 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="Business Manager" Height="600" Width="1000" Background="White"  MinWidth="800" MinHeight="450">
-    <Grid Background="#FF8D8080">
+        Title="Business Manager" Height="600" Width="1000" Background="White"  MinWidth="800" MinHeight="450"
+        Icon="./img/icon.png"
+        >
+    <Grid Background="#FF8D8080" >
 
         <DockPanel x:Name="Leftpanel" HorizontalAlignment="Left"  Height="auto" LastChildFill="False" Margin="0,32,0,-0.333" Width="160" Grid.ColumnSpan="2" Background="#FFBCCAD6"/>
 
-        <DockPanel x:Name="RightPanel" HorizontalAlignment="Right" Height="auto" LastChildFill="False" Margin="620,32,0,-0.333" Width="173" Grid.Column="1" Background="#FFBCCAD6" Grid.RowSpan="2" Grid.ColumnSpan="2">
-            <Calendar x:Name="MainCal" Height="389" Margin="4,-6,-3.667,5.667" DockPanel.Dock="Top"/>
+        <DockPanel x:Name="RightPanel" HorizontalAlignment="Right" Height="auto" Margin="620,32,0,-0.333" Width="173" Grid.Column="1" Background="#FFBCCAD6" Grid.RowSpan="2" Grid.ColumnSpan="2" LastChildFill="False">
+            <Calendar x:Name="MainCal" Height="173" Margin="4,-6,-3.667,5.667" DockPanel.Dock="Top"/>
+            <Label x:Name="lbllbl" Content="Label" Height="35" VerticalAlignment="Top" Margin="20,5,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left" Width="154"/>
+            <Label x:Name="lbb" Content="Label" Height="35" VerticalAlignment="Top" Margin="20,5,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left" Width="154"/>
 
         </DockPanel>
         <Menu x:Name="MainMenu" Height="32" VerticalAlignment="Top" Width="auto" HorizontalContentAlignment="Stretch" Margin="0,0,0.333,0" Background="#FF667292" Grid.ColumnSpan="2" BorderBrush="#FFBCCAD6" >
@@ -78,11 +82,31 @@
                     <Grid>
 
 
-                        <Grid Height="390" Background="#FFE11818" Margin="0,0,0.333,0" VerticalAlignment="Top"/>
-                        <DataGrid x:Name = "WorkerInfoTable" Width="auto" Height="390" AlternatingRowBackground = "#FFBCCAD6" ItemsSource="{Binding workersInfo}" Panel.ZIndex="1000" VerticalAlignment="Top" HorizontalAlignment="Left" CanUserResizeColumns="False">
-                       
+                        <Grid Height="390" Background="#FFE11818" Margin="0,0,0.333,0" VerticalAlignment="Top">
+                            <Menu  Height="32" VerticalAlignment="Top" Width="auto" HorizontalContentAlignment="Stretch" Margin="0,0,0.333,0" Background="#FF667292" Grid.ColumnSpan="2" BorderBrush="#FFBCCAD6" >
+                                <MenuItem  Header="Customers" IsCheckable="True" Height="31">
+                                    <Button Content="Connect"/>
+                                    <Button Content="Change User"/>
+                                </MenuItem>
+                                <MenuItem  Header="Workers" IsCheckable="True"/>
+                                <MenuItem  Header="Sales" IsCheckable="True"/>
+                                <MenuItem  Header="Provider" IsCheckable="True"/>
+                                <MenuItem  Header="Sales" IsCheckable="True"/>
+                            </Menu>
+                            <DataGrid CanUserReorderColumns="True" x:Name = "WorkerInfoTable" Width="auto" Height="390" AlternatingRowBackground = "#FFBCCAD6" ItemsSource="{Binding workersInfo}"  CanUserResizeColumns="False" AutoGenerateColumns="False" VerticalAlignment="Top" Margin="0,30,0,0">
 
-                        </DataGrid>
+                                <DataGrid.Columns>
+
+                                    <DataGridTextColumn  Binding="{Binding FullName }" Header="Name" IsReadOnly="True" Width="auto"/>
+                                    <DataGridTextColumn Binding="{Binding CalcAge}" Header="Age" IsReadOnly="True" Width="auto"/>
+                                    <DataGridTextColumn Binding="{Binding Class}" Header="Class" IsReadOnly="True" Width="auto"/>
+                                    <DataGridTextColumn Binding="{Binding Role}" Header="Role" IsReadOnly="True" Width="auto"/>
+                                </DataGrid.Columns>
+
+
+                            </DataGrid>
+                        </Grid>
+                   
 
 
                     </Grid>
@@ -96,6 +120,7 @@
                     </TabItem.Background>
                     <Grid/>
                 </TabItem>
+
 
             </TabControl>
         </DockPanel>

@@ -8,7 +8,6 @@ C:\Projects\Business-Manager\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.lref
 C:\Projects\Business-Manager\WpfApp1\obj\Debug\MainWindow.baml
 C:\Projects\Business-Manager\WpfApp1\obj\Debug\WpfApp1.g.resources
 C:\Projects\Business-Manager\WpfApp1\obj\Debug\WpfApp1.Properties.Resources.resources
-C:\Projects\Business-Manager\WpfApp1\obj\Debug\Business_Manager.csproj.GenerateResource.cache
+C:\Projects\Business-Manager\WpfApp1\obj\Debug\Businness_Manager.csproj.GenerateResource.cache
 C:\Projects\Business-Manager\WpfApp1\obj\Debug\WpfApp1.exe
 C:\Projects\Business-Manager\WpfApp1\obj\Debug\WpfApp1.pdb
-C:\Projects\Business-Manager\WpfApp1\obj\Debug\Business_Manager.csprojAssemblyReference.cache

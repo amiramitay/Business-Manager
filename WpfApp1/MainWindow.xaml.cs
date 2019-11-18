@@ -25,21 +25,25 @@ namespace WpfApp1
         {
 
             InitializeComponent();
-
-            workersInfo=new List<Worker>();
+            WorkerInfoTable.RowHeaderWidth = 0;
+            workersInfo =new List<Worker>();
             Worker a = new Worker();
             a.FirstName = "Amir";
             a.LastName = "Amitay";
             a.Phone = "0541111111";
+            a.Role = "Manager";
+            a.Class = "Manager";
+            
+
             DateTime date = new DateTime(1993, 3, 30).Date;
-          //  MessageBox.Show(date.Date.ToString("MM/dd/yyyy"));
+            a.CalcAge();
             a.DateOfBirth = date.Date;
             workersInfo.Add(a);
-          //  WorkerInfoTable.Columns[1].HeaderStringFormat = "HH:mm:ss";//DefaultCellStyle.Format = "HH:mm:ss";
             WorkerInfoTable.ItemsSource = workersInfo;
-       //     WorkerInfoTable.Columns[3].HeaderStringFormat= "HH:mm:ss";
-                
-
+            lbllbl.Content = a.FullName();
+            lbb.Content = a.CalcAge();
+            
+            
         }
 
   
