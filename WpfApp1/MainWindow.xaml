@@ -10,89 +10,127 @@
         >
     <Grid Background="#FF8D8080" >
 
-        <DockPanel x:Name="Leftpanel" HorizontalAlignment="Left"  Height="auto" LastChildFill="False" Margin="0,32,0,-0.333" Width="160" Grid.ColumnSpan="2" Background="#FFBCCAD6"/>
+        <DockPanel x:Name="Leftpanel" HorizontalAlignment="Left"  Height="auto" LastChildFill="False" Margin="0,32,0,-0.333" Width="160" Grid.ColumnSpan="2" Background="#FF292F33"/>
 
-        <DockPanel x:Name="RightPanel" HorizontalAlignment="Right" Height="auto" Margin="620,32,0,-0.333" Width="173" Grid.Column="1" Background="#FFBCCAD6" Grid.RowSpan="2" Grid.ColumnSpan="2" LastChildFill="False">
+        <DockPanel x:Name="RightPanel" HorizontalAlignment="Right" Height="auto" Margin="620,32,0,-0.333" Width="173" Grid.Column="1" Background="#FF292F33" Grid.RowSpan="2" Grid.ColumnSpan="2" LastChildFill="False">
             <Calendar x:Name="MainCal" Height="173" Margin="4,-6,-3.667,5.667" DockPanel.Dock="Top"/>
             <Label x:Name="lbllbl" Content="Label" Height="35" VerticalAlignment="Top" Margin="20,5,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left" Width="154"/>
             <Label x:Name="lbb" Content="Label" Height="35" VerticalAlignment="Top" Margin="20,5,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left" Width="154"/>
 
         </DockPanel>
-        <Menu x:Name="MainMenu" Height="32" VerticalAlignment="Top" Width="auto" HorizontalContentAlignment="Stretch" Margin="0,0,0.333,0" Background="#FF667292" Grid.ColumnSpan="2" BorderBrush="#FFBCCAD6" >
+        <Menu x:Name="MainMenu" Height="32" VerticalAlignment="Top" Width="auto" HorizontalContentAlignment="Stretch" Margin="0,0,0.333,0" Background="#292F33" Grid.ColumnSpan="2" BorderBrush="#FFBCCAD6" Foreground="#E1E8ED" >
             <MenuItem x:Name="CustomersBtn" Header="Customers" IsCheckable="True" Height="31">
                 <Button Content="Connect"/>
                 <Button Content="Change User"/>
             </MenuItem>
             <MenuItem x:Name="WorkersBtn" Header="Workers" IsCheckable="True"/>
-            <MenuItem x:Name="SalesBtn" Header="Sales" IsCheckable="True"/>
             <MenuItem x:Name="ProviderBtn" Header="Provider" IsCheckable="True"/>
-            <MenuItem x:Name="SalesBtn1" Header="Sales" IsCheckable="True"/>
+            <MenuItem x:Name="SalesBtn" Header="Sales" IsCheckable="True"/>
+            <MenuItem Header="Supply"/>
+            <MenuItem x:Name="SalesBtn1" Header="Orders" IsCheckable="True"/>
         </Menu>
         <Grid HorizontalAlignment="Left" Height="100" Margin="164,128,0,0" VerticalAlignment="Top" Width="0" Grid.Column="1"/>
-        <DockPanel x:Name="centerpanel" Height="auto" Width="auto" LastChildFill="true" Margin="155,32,158.333,-0.333" RenderTransformOrigin="-0.14,-0.127" Grid.Column="1" Background="#FFF1E3DD">
-            <TabControl x:Name="mainTabs" Background="#FFF1E3DD">
-                <TabItem x:Name="LoginTab" Header="Login" Margin="-5,-5,0.333,0">
-                    <TabItem.Background>
-                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                            <GradientStop Color="#FFF0F0F0" Offset="0"/>
-                            <GradientStop Color="#FF8D9DB6" Offset="1"/>
-                        </LinearGradientBrush>
-                    </TabItem.Background>
-                    <Grid Background="#FFF1E3DD">
+        <DockPanel x:Name="centerpanel" Height="auto" Width="auto" LastChildFill="true" Margin="155,32,158.333,-0.333" RenderTransformOrigin="-0.14,-0.127" Grid.Column="1" Background="#CCD6DD">
+            <TabControl x:Name="mainTabs" Background="#FF55ACEE">
+                <TabItem x:Name="LoginTab" Header="Login" Margin="-5,-5,0.333,0" Background="#CCD6DD">
+                    <Grid Background="#FF55ACEE">
                         <Grid Height="500" Margin="50,10" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500">
-                            <Button x:Name="RegisterBtn" Content="Register" HorizontalAlignment="Left" Margin="270,278,0,0" VerticalAlignment="Top" Width="75"/>
-                            <Button x:Name="LoginBtn" Content="Login" HorizontalAlignment="Left" Margin="134,278,0,0" VerticalAlignment="Top" Width="75"/>
-                            <Label Content="User Name" HorizontalAlignment="Left" Margin="134,173,0,0" VerticalAlignment="Top"/>
-                            <Label Content="Password" HorizontalAlignment="Left" Margin="134,225,0,0" VerticalAlignment="Top"/>
-                            <TextBox HorizontalAlignment="Left" Height="23" Margin="223,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                            <PasswordBox HorizontalAlignment="Left" Margin="221,230,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
+                            <Button x:Name="RegisterBtn" Content="Register" HorizontalAlignment="Left" Margin="270,278,0,0" VerticalAlignment="Top" Width="75" Foreground="#FF292F33" BorderBrush="#FF292F33" Background="#FFCCD6DD"/>
+                            <Button x:Name="LoginBtn" Content="Login" HorizontalAlignment="Left" Margin="134,278,0,0" VerticalAlignment="Top" Width="75" Foreground="#FF292F33" BorderBrush="#FF292F33" Background="#FFCCD6DD"/>
+                            <Label Content="User Name" HorizontalAlignment="Left" Margin="134,173,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FF292F33"/>
+                            <Label Content="Password" HorizontalAlignment="Left" Margin="134,225,0,0" VerticalAlignment="Top" Foreground="#FF292F33"/>
+                            <TextBox HorizontalAlignment="Left" Height="23" Margin="223,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" SelectionBrush="#FF292F33" Foreground="#FF292F33"/>
+                            <PasswordBox HorizontalAlignment="Left" Margin="221,230,0,0" VerticalAlignment="Top" Width="120" Height="23" SelectionBrush="#FF292F33" Foreground="#FF292F33"/>
                         </Grid>
 
 
 
                     </Grid>
                 </TabItem>
-                <TabItem x:Name="CustomersInfoTab" Header="Customers Info" Margin="-5,-5,0.333,0" >
-                    <TabItem.Background>
-                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                            <GradientStop Color="#FFF0F0F0" Offset="0"/>
-                            <GradientStop Color="#FFB7D7E8" Offset="1"/>
-                        </LinearGradientBrush>
-                    </TabItem.Background>
+                <TabItem x:Name="CustomersInfoTab" Header="Customers Info" Margin="-5,-5,0.333,0" Background="#CCD6DD" >
                     <Grid>
+                        <Grid Height="390" Background="#FFE11818" Margin="0,0,0.333,0" VerticalAlignment="Top">
+                            <Menu Grid.Column="2" Height="32" Width="auto" HorizontalContentAlignment="Stretch" Margin="0,0,0.333,0" Background="#FF55ACEE" Grid.ColumnSpan="2" BorderBrush="#FFBCCAD6" VerticalAlignment="Top" >
+                                <MenuItem  Header="Sort By" Height="31" HorizontalAlignment="Left">
+                                    <MenuItem Header="Name" Background="#55ACEE" Width="auto" IsCheckable="True" />
+                                    <MenuItem Header="Class" Background="#55ACEE" Width="auto" IsCheckable="True"/>
+                                    <MenuItem Header="Role" Background="#55ACEE" Width="auto" IsCheckable="True"/>
+                                </MenuItem>
+
+                                <MenuItem  Header="Group By" Height="31">
+                                    <MenuItem Header="Class" Background="#55ACEE" Width="auto" IsCheckable="True"/>
+                                    <MenuItem Header="Role" Background="#55ACEE" Width="auto" IsCheckable="True"/>
+                                </MenuItem>
+                            </Menu>
+
+                            <DataGrid CanUserReorderColumns="True" x:Name = "CustomersInfoTable" Width="auto" Height="390" AlternatingRowBackground = "#FFBCCAD6" ItemsSource="{Binding workersInfo}"  CanUserResizeColumns="False" AutoGenerateColumns="False" VerticalAlignment="Top" Margin="0,30,0,0">
+
+                                <DataGrid.Columns>
+
+                                    <DataGridTextColumn  Binding="{Binding FullName }" Header="Name" IsReadOnly="True" Width="auto"/>
+                                    <DataGridTextColumn Binding="{Binding CalcAge}" Header="Telephone" IsReadOnly="True" Width="auto"/>
+                                    <DataGridTextColumn Binding="{Binding Class}" Header="E-mail" IsReadOnly="True" Width="auto"/>
+                                    <DataGridCheckBoxColumn Binding="{Binding Role}" Header="Vip" IsReadOnly="True" Width="auto"/>
+                                </DataGrid.Columns>
+
+
+                            </DataGrid>
+                        </Grid>
+
+
 
                     </Grid>
                 </TabItem>
-                <TabItem x:Name="SalesTab" Header="Sales" Margin="-5,-5,0.333,0">
-                    <TabItem.Background>
-                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                            <GradientStop Color="#FFF0F0F0" Offset="0"/>
-                            <GradientStop Color="#FFDAEBE8" Offset="1"/>
-                        </LinearGradientBrush>
-                    </TabItem.Background>
-                    <Grid/>
-                </TabItem>
-                <TabItem x:Name="WorkersInfoTab" Header="Workers Info" Margin="-4.667,-5,0,0.333" HorizontalAlignment="Right" Width="84">
-                    <TabItem.Background>
-                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                            <GradientStop Color="#FFF0F0F0" Offset="0"/>
-                            <GradientStop Color="#FFFBEFCC" Offset="1"/>
-                        </LinearGradientBrush>
-                    </TabItem.Background>
+                <TabItem x:Name="SalesTab" Header="Sales" Margin="-5,-5,0.333,0" Background="#CCD6DD">
                     <Grid>
-
-
                         <Grid Height="390" Background="#FFE11818" Margin="0,0,0.333,0" VerticalAlignment="Top">
-                            <Menu  Height="32" VerticalAlignment="Top" Width="auto" HorizontalContentAlignment="Stretch" Margin="0,0,0.333,0" Background="#FF667292" Grid.ColumnSpan="2" BorderBrush="#FFBCCAD6" >
-                                <MenuItem  Header="Customers" IsCheckable="True" Height="31">
-                                    <Button Content="Connect"/>
-                                    <Button Content="Change User"/>
+                            <Menu Grid.Column="2" Height="32" Width="auto" HorizontalContentAlignment="Stretch" Margin="0,0,0.333,0" Background="#FF55ACEE" Grid.ColumnSpan="2" BorderBrush="#FFBCCAD6" VerticalAlignment="Top" >
+                                <MenuItem  Header="Sort By" Height="31" HorizontalAlignment="Left">
+                                    <MenuItem Header="Name" Background="#55ACEE" Width="auto" IsCheckable="True" />
+                                    <MenuItem Header="Class" Background="#55ACEE" Width="auto" IsCheckable="True"/>
+                                    <MenuItem Header="Role" Background="#55ACEE" Width="auto" IsCheckable="True"/>
                                 </MenuItem>
-                                <MenuItem  Header="Workers" IsCheckable="True"/>
-                                <MenuItem  Header="Sales" IsCheckable="True"/>
-                                <MenuItem  Header="Provider" IsCheckable="True"/>
-                                <MenuItem  Header="Sales" IsCheckable="True"/>
+
+                                <MenuItem  Header="Group By" Height="31">
+                                    <MenuItem Header="Class" Background="#55ACEE" Width="auto" IsCheckable="True"/>
+                                    <MenuItem Header="Role" Background="#55ACEE" Width="auto" IsCheckable="True"/>
+                                </MenuItem>
                             </Menu>
+
+                            <DataGrid CanUserReorderColumns="True" x:Name = "SalesTable" Width="auto" Height="390" AlternatingRowBackground = "#FFBCCAD6" ItemsSource="{Binding workersInfo}"  CanUserResizeColumns="False" AutoGenerateColumns="False" VerticalAlignment="Top" Margin="0,30,0,0">
+
+                                <DataGrid.Columns>
+
+                                    <DataGridTextColumn  Binding="{Binding FullName }" Header="Name" IsReadOnly="True" Width="auto"/>
+                                    <DataGridTextColumn Binding="{Binding CalcAge}" Header="Age" IsReadOnly="True" Width="auto"/>
+                                    <DataGridTextColumn Binding="{Binding Class}" Header="Class" IsReadOnly="True" Width="auto"/>
+                                    <DataGridTextColumn Binding="{Binding Role}" Header="Role" IsReadOnly="True" Width="auto"/>
+                                </DataGrid.Columns>
+
+
+                            </DataGrid>
+                        </Grid>
+
+
+
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="WorkersInfoTab" Header="Workers Info" Margin="0,-5,0,0.333" HorizontalAlignment="Right" Width="79" Background="#CCD6DD">
+                    <Grid>
+                        <Grid Height="390" Background="#FFE11818" Margin="0,0,0.333,0" VerticalAlignment="Top">
+                            <Menu Grid.Column="2" Height="32" Width="auto" HorizontalContentAlignment="Stretch" Margin="0,0,0.333,0" Background="#FF55ACEE" Grid.ColumnSpan="2" BorderBrush="#FFBCCAD6" VerticalAlignment="Top" >
+                                <MenuItem  Header="Sort By" Height="31" HorizontalAlignment="Left">
+                                    <MenuItem Header="Name" Background="#55ACEE" Width="auto" IsCheckable="True" />
+                                    <MenuItem Header="Class" Background="#55ACEE" Width="auto" IsCheckable="True"/>
+                                    <MenuItem Header="Role" Background="#55ACEE" Width="auto" IsCheckable="True"/>
+                                </MenuItem>
+
+                                <MenuItem  Header="Group By" Height="31">
+                                    <MenuItem Header="Class" Background="#55ACEE" Width="auto" IsCheckable="True"/>
+                                    <MenuItem Header="Role" Background="#55ACEE" Width="auto" IsCheckable="True"/>
+                                </MenuItem>
+                            </Menu>
+
                             <DataGrid CanUserReorderColumns="True" x:Name = "WorkerInfoTable" Width="auto" Height="390" AlternatingRowBackground = "#FFBCCAD6" ItemsSource="{Binding workersInfo}"  CanUserResizeColumns="False" AutoGenerateColumns="False" VerticalAlignment="Top" Margin="0,30,0,0">
 
                                 <DataGrid.Columns>
@@ -106,19 +144,45 @@
 
                             </DataGrid>
                         </Grid>
-                   
+
 
 
                     </Grid>
                 </TabItem>
-                <TabItem x:Name="WorkersHours" Header="Workers Hours" Margin="-5,-5,0.333,0">
-                    <TabItem.Background>
-                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                            <GradientStop Color="#FFF0F0F0" Offset="0"/>
-                            <GradientStop Color="#FFFBEFCC" Offset="1"/>
-                        </LinearGradientBrush>
-                    </TabItem.Background>
-                    <Grid/>
+                <TabItem x:Name="WorkersHours" Header="Workers Hours" Margin="-5,-5,0.333,0" Background="#CCD6DD">
+
+                    <Grid>
+                        <Grid Height="390" Background="#FFE11818" Margin="0,0,0.333,0" VerticalAlignment="Top">
+                            <Menu Grid.Column="2" Height="32" Width="auto" HorizontalContentAlignment="Stretch" Margin="0,0,0.333,0" Background="#FF55ACEE" Grid.ColumnSpan="2" BorderBrush="#FFBCCAD6" VerticalAlignment="Top" >
+                                <MenuItem  Header="Sort By" Height="31" HorizontalAlignment="Left">
+                                    <MenuItem Header="Name" Background="#55ACEE" Width="auto" IsCheckable="True" />
+                                    <MenuItem Header="Class" Background="#55ACEE" Width="auto" IsCheckable="True"/>
+                                    <MenuItem Header="Role" Background="#55ACEE" Width="auto" IsCheckable="True"/>
+                                </MenuItem>
+
+                                <MenuItem  Header="Group By" Height="31">
+                                    <MenuItem Header="Class" Background="#55ACEE" Width="auto" IsCheckable="True"/>
+                                    <MenuItem Header="Role" Background="#55ACEE" Width="auto" IsCheckable="True"/>
+                                </MenuItem>
+                            </Menu>
+
+                            <DataGrid CanUserReorderColumns="True" x:Name = "WorkersHoursTable" Width="auto" Height="390" AlternatingRowBackground = "#FFBCCAD6" ItemsSource="{Binding workersInfo}"  CanUserResizeColumns="False" AutoGenerateColumns="False" VerticalAlignment="Top" Margin="0,30,0,0">
+
+                                <DataGrid.Columns>
+
+                                    <DataGridTextColumn  Binding="{Binding FullName }" Header="Name" IsReadOnly="True" Width="auto"/>
+                                    <DataGridTextColumn Binding="{Binding CalcAge}" Header="Age" IsReadOnly="True" Width="auto"/>
+                                    <DataGridTextColumn Binding="{Binding Class}" Header="Class" IsReadOnly="True" Width="auto"/>
+                                    <DataGridTextColumn Binding="{Binding Role}" Header="Role" IsReadOnly="True" Width="auto"/>
+                                </DataGrid.Columns>
+
+
+                            </DataGrid>
+                        </Grid>
+
+
+
+                    </Grid>
                 </TabItem>
 
 

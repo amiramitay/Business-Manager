@@ -26,14 +26,14 @@ namespace WpfApp1
 
             InitializeComponent();
             WorkerInfoTable.RowHeaderWidth = 0;
-            workersInfo =new List<Worker>();
+            workersInfo = new List<Worker>();
             Worker a = new Worker();
             a.FirstName = "Amir";
             a.LastName = "Amitay";
             a.Phone = "0541111111";
             a.Role = "Manager";
             a.Class = "Manager";
-            
+
 
             DateTime date = new DateTime(1993, 3, 30).Date;
             a.CalcAge();
@@ -42,11 +42,11 @@ namespace WpfApp1
             WorkerInfoTable.ItemsSource = workersInfo;
             lbllbl.Content = a.FullName();
             lbb.Content = a.CalcAge();
-            
-            
+
+
         }
 
-  
+        
     }
 }
 
