@@ -21,6 +21,7 @@ namespace WpfApp1
     public partial class MainWindow : Window
     {
         public List<Worker> workersInfo { get; set; }
+
         public MainWindow()
         {
 
@@ -33,21 +34,33 @@ namespace WpfApp1
             a.Phone = "0541111111";
             a.Role = "Manager";
             a.Class = "Manager";
-
+            Customer c = createNewCustomer(); 
 
             DateTime date = new DateTime(1993, 3, 30).Date;
             a.CalcAge();
             a.DateOfBirth = date.Date;
             workersInfo.Add(a);
             WorkerInfoTable.ItemsSource = workersInfo;
-            lbllbl.Content = a.FullName();
+            lbllbl.Content = c.Name;
             lbb.Content = a.CalcAge();
 
 
+    
         }
+
+        public Customer createNewCustomer()
+        {
+            Customer c = new Customer("amr", true, "000", "aaa");
+
+
+            return c;
+        }
+
+       
 
         
     }
+
 }
 
 

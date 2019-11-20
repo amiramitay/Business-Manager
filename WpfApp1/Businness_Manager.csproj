@@ -100,9 +100,26 @@
   <ItemGroup>
     <Resource Include="team.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="img\delete.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="img\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\add1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\delete1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\edit1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
