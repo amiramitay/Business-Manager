@@ -10,6 +10,9 @@
         public string Class { get; set; }
         public string Role { get; set; }
         public System.DateTime StartWork { get; set; }
+        public bool isUser { get; set; }
+
+
         public int CalcAge()
         {
             var today = System.DateTime.Today;
@@ -38,6 +41,7 @@
             
           
         }
+        
        
     }
 }

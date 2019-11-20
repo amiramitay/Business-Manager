@@ -12,12 +12,12 @@
 
         <DockPanel x:Name="Leftpanel" HorizontalAlignment="Left"  Height="auto" LastChildFill="False" Margin="0,32,0,-0.333" Width="159" Background="#FF292F33">
             <StackPanel Height="200" VerticalAlignment="Top" Width="159" Margin="0,0,0,0" HorizontalAlignment="Left" >
-                <Button Height="35" Width="53" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{x:Null}" IsCancel="True">
+                <Button x:Name="AddBtn" Height="35" Width="53" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{x:Null}" IsCancel="True" Click="AddBtn_Click" Foreground="{x:Null}" MouseMove="AddBtn_MouseMove">
                     <Button.Background>
                         <ImageBrush ImageSource="./img/add1.png" Stretch="Uniform"/>
                     </Button.Background>
                 </Button>
-                <Button Height="35" Margin="106,-35,0,0" Width="53">
+                <Button x:Name="DeleteBtn" Height="35" Margin="106,-35,0,0" Width="53" Click="DeleteBtn_Click">
                     <Button.BorderBrush>
                         <ImageBrush/>
                     </Button.BorderBrush>
@@ -25,16 +25,16 @@
                         <ImageBrush ImageSource="./img/delete1.png" Stretch="Uniform"/>
                     </Button.Background>
                 </Button>
-                <Button Height="35" Margin="53,-35,0,0" Width="53" HorizontalAlignment="Left" BorderBrush="{x:Null}">
+                <Button x:Name="EditBtn" Height="35" Margin="53,-35,0,0" Width="53" HorizontalAlignment="Left" BorderBrush="{x:Null}" Click="EditBtn_Click">
                     <Button.Background>
                         <ImageBrush Stretch="Uniform" ImageSource="./img/edit1.png"/>
                     </Button.Background>
                 </Button>
                 <Menu Height="34" Margin="0,5,0,0">
-                    <MenuItem  Background="#FF292F33" Header="Group By" Height="34" HorizontalAlignment="Left" Width="74" FontWeight="Bold" Foreground="#FF55ACEE" Margin="0.5,0,0,0" BorderBrush="#FF55ACEE">
+                    <MenuItem  Background="#FF292F33" Header="Group By" Height="34" HorizontalAlignment="Left" Width="74" FontWeight="Bold" Foreground="#FF55ACEE" Margin="0.5,0,0,0" BorderBrush="#FF55ACEE" IsEnabled="False">
                         <Button Background="#FFFA4848" Content="aaaaa" IsCancel="True"/>
                     </MenuItem>
-                    <MenuItem Background="#FF292F33" Header="Sort By" Height="34" HorizontalAlignment="Left" Width="80" FontWeight="Bold" Foreground="#FF55ACEE" BorderBrush="#FF55ACEE">
+                    <MenuItem x:Name="SideMenu" Background="#FF292F33" Header="Sort By" Height="34" HorizontalAlignment="Left" Width="80" FontWeight="Bold" Foreground="#FF55ACEE" BorderBrush="#FF55ACEE" IsEnabled="False">
                         <MenuItem IsCheckable="True" Header="AA" Background="#FF292F33" BorderBrush="{x:Null}" ></MenuItem>
                     </MenuItem>
                 </Menu>
@@ -47,21 +47,21 @@
         </DockPanel>
 
         <DockPanel x:Name="RightPanel" HorizontalAlignment="Right" Height="auto" Margin="620,32,0,-0.333" Width="173" Grid.Column="1" Background="#FF292F33" Grid.RowSpan="2" Grid.ColumnSpan="2" LastChildFill="False">
-            <Calendar x:Name="MainCal" Height="173" Margin="4,-6,-3.667,5.667" DockPanel.Dock="Top" Panel.ZIndex="10"/>
+            <Calendar x:Name="MainCal" Height="173" Margin="4,-6,-3.667,5.667" DockPanel.Dock="Top" Panel.ZIndex="10" IsEnabled="False"/>
             <Label x:Name="lbllbl" Content="Label" Height="35" VerticalAlignment="Top" Margin="20,5,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left" Width="154"/>
             <Label x:Name="lbb" Content="Label" Height="35" VerticalAlignment="Top" Margin="20,5,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left" Width="154"/>
 
         </DockPanel>
         <Menu x:Name="MainMenu" Height="32" VerticalAlignment="Top" Width="auto" HorizontalContentAlignment="Stretch" Margin="0,0,0.333,0" Background="#292F33" Grid.ColumnSpan="2" BorderBrush="#FFBCCAD6" Foreground="#E1E8ED" >
-            <MenuItem x:Name="CustomersBtn" Header="Customers" IsCheckable="True" Height="31">
+            <MenuItem x:Name="CustomersBtn" Header="Customers" IsCheckable="True" Height="31" IsEnabled="False">
                 <Button Content="Connect"/>
                 <Button Content="Change User"/>
             </MenuItem>
-            <MenuItem x:Name="WorkersBtn" Header="Workers" IsCheckable="True"/>
-            <MenuItem x:Name="ProviderBtn" Header="Provider" IsCheckable="True"/>
-            <MenuItem x:Name="SalesBtn" Header="Sales" IsCheckable="True"/>
-            <MenuItem Header="Supply"/>
-            <MenuItem x:Name="SalesBtn1" Header="Orders" IsCheckable="True"/>
+            <MenuItem x:Name="WorkersBtn" Header="Workers" IsCheckable="True" IsEnabled="False"/>
+            <MenuItem x:Name="ProviderBtn" Header="Provider" IsCheckable="True" IsEnabled="False"/>
+            <MenuItem x:Name="SalesBtn" Header="Sales" IsCheckable="True" IsEnabled="False"/>
+            <MenuItem Header="Supply" IsEnabled="False"/>
+            <MenuItem x:Name="SalesBtn1" Header="Orders" IsCheckable="True" IsEnabled="False"/>
         </Menu>
         <Grid HorizontalAlignment="Left" Height="100" Margin="164,128,0,0" VerticalAlignment="Top" Width="0" Grid.Column="1"/>
         <DockPanel x:Name="centerpanel" Height="auto" Width="auto" LastChildFill="true" Margin="155,32,158.333,-0.333" RenderTransformOrigin="-0.14,-0.127" Grid.Column="1" Background="#CCD6DD">
@@ -69,12 +69,16 @@
                 <TabItem x:Name="LoginTab" Header="Login" Margin="-5,-5,0.333,0" Background="#CCD6DD">
                     <Grid Background="#FF55ACEE">
                         <Grid Height="500" Margin="50,10" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500">
-                            <Button x:Name="RegisterBtn" Content="Register" HorizontalAlignment="Left" Margin="270,278,0,0" VerticalAlignment="Top" Width="75" Foreground="#FF292F33" BorderBrush="#FF292F33" Background="#FFCCD6DD"/>
-                            <Button x:Name="LoginBtn" Content="Login" HorizontalAlignment="Left" Margin="134,278,0,0" VerticalAlignment="Top" Width="75" Foreground="#FF292F33" BorderBrush="#FF292F33" Background="#FFCCD6DD"/>
+                            <Button x:Name="RegisterBtn" Content="Register" HorizontalAlignment="Left" Margin="270,278,0,0" VerticalAlignment="Top" Width="75" Foreground="#FF292F33" BorderBrush="#FF292F33" Click="RegisterBtn_Click">
+                                <Button.Background>
+                                    <ImageBrush/>
+                                </Button.Background>
+                            </Button>
+                            <Button x:Name="LoginBtn" Content="Login" HorizontalAlignment="Left" Margin="134,278,0,0" VerticalAlignment="Top" Width="75" Foreground="#FF292F33" BorderBrush="#FF292F33" Background="#FFCCD6DD" Click="LoginBtn_Click"/>
                             <Label Content="User Name" HorizontalAlignment="Left" Margin="134,173,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FF292F33"/>
                             <Label Content="Password" HorizontalAlignment="Left" Margin="134,225,0,0" VerticalAlignment="Top" Foreground="#FF292F33"/>
-                            <TextBox HorizontalAlignment="Left" Height="23" Margin="223,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" SelectionBrush="#FF292F33" Foreground="#FF292F33"/>
-                            <PasswordBox HorizontalAlignment="Left" Margin="221,230,0,0" VerticalAlignment="Top" Width="120" Height="23" SelectionBrush="#FF292F33" Foreground="#FF292F33"/>
+                            <TextBox x:Name="UserNameTextBox" HorizontalAlignment="Left" Height="23" Margin="223,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" SelectionBrush="#FF292F33" Foreground="#FF292F33"/>
+                            <PasswordBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Margin="221,230,0,0" VerticalAlignment="Top" Width="120" Height="23" SelectionBrush="#FF292F33" Foreground="#FF292F33"/>
                         </Grid>
 
 
