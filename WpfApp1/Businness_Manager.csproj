@@ -56,6 +56,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Customer.cs" />
+    <Compile Include="Item.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="Product.cs" />
+    <Compile Include="Provider.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Worker.cs" />
     <Page Include="MainWindow.xaml">

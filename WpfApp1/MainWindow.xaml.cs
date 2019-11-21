@@ -28,7 +28,7 @@ namespace WpfApp1
         {
 
             InitializeComponent();
-            foreach(TabItem t in mainTabs.Items)
+            foreach (TabItem t in mainTabs.Items)
             {
                 if (!t.Name.Equals("LoginTab"))
                     t.Visibility = Visibility.Hidden;
@@ -45,23 +45,26 @@ namespace WpfApp1
             a.Phone = "0541111111";
             a.Role = "Manager";
             a.Class = "Manager";
-            Customer c = createNewCustomer(); 
 
+            Order o = new Order();
+           
+            Customer c = createNewCustomer();
+            o.Customer = c;
             DateTime date = new DateTime(1993, 3, 30).Date;
             a.CalcAge();
             a.DateOfBirth = date.Date;
             workersInfo.Add(a);
             WorkerInfoTable.ItemsSource = workersInfo;
-            lbllbl.Content = c.Name;
+            lbllbl.Content = o.Customer.Name;
             lbb.Content = a.CalcAge();
 
 
-    
+
         }
 
         public Customer createNewCustomer()
         {
-            Customer c = new Customer("amr", true, "000", "aaa");
+            Customer c = new Customer("amraa", true, "000", "aaa");
 
 
             return c;
@@ -71,16 +74,16 @@ namespace WpfApp1
         {
             foreach (MenuItem i in MainMenu.Items)
                 i.IsEnabled = true;
-            
 
-            foreach(MenuItem i in SideMenu.Items)
+
+            foreach (MenuItem i in SideMenu.Items)
                 i.IsEnabled = true;
 
             MainCal.IsEnabled = true;
 
         }
 
-        public void Disconnect() 
+        public void Disconnect()
         {
 
             if (MessageBox.Show("Are you sure?", "", MessageBoxButton.YesNo).ToString().Equals("Yes"))
@@ -95,7 +98,7 @@ namespace WpfApp1
 
                 MainCal.IsEnabled = false;
             }
-            else 
+            else
             {
                 lbb.Content = "no";
 
@@ -105,24 +108,27 @@ namespace WpfApp1
 
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
-                if (UserNameTextBox.Text.Equals("amir"))
+            if (UserNameTextBox.Text.Equals("amir"))
+            {
+                if (PasswordTextBox.Password.Equals("1234"))
                 {
-                    if (PasswordTextBox.Password.Equals("1234"))
-                    {
 
-                        isLogin = true;
-                        MessageBox.Show("Login");
-                        EnableMenus();
-                    }
-
-                    else
-                        MessageBox.Show("Not login");
+                    isLogin = true;
+                    MessageBox.Show("Login");
+                    EnableMenus();
+                    CustomersBtn.IsChecked = true;
+                    mainTabs.Items.Remove(LoginTab);
 
                 }
 
                 else
                     MessageBox.Show("Not login");
+
             }
+
+            else
+                MessageBox.Show("Not login");
+        }
 
         private void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -131,11 +137,11 @@ namespace WpfApp1
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (!isLogin) 
+            if (!isLogin)
             {
                 return;
             }
-            else 
+            else
             {
                 MessageBox.Show("Yes");
 
@@ -170,10 +176,75 @@ namespace WpfApp1
 
         private void AddBtn_MouseMove(object sender, MouseEventArgs e)
         {
-            
+
+        }
+
+
+        public void AddAndRemoveTabs(string menuItem)
+        {
+            switch (menuItem)
+            {
+                case "CustomersBtn":
+                    mainTabs.Items.Add(CustomersInfoTab);
+                    break;
+                case "WorkersBtn":
+                    break;
+                case "ProviderBtn":
+                    break;
+                case "SalesBtn":
+                    break;
+
+
+            }
+        }
+
+        public void UncheckMenuItems(string menuItem)
+        {
+            foreach (MenuItem i in MainMenu.Items)
+                if (!i.Name.Equals(menuItem))
+                    i.IsChecked = false;
+
+
+        }
+
+        private void CustomersBtn_Checked(object sender, RoutedEventArgs e)
+        {
+            AddAndRemoveTabs("CustomersBtn");
+            UncheckMenuItems("CustomersBtn");
+        }
+
+        private void WorkersBtn_Checked(object sender, RoutedEventArgs e)
+        {
+            AddAndRemoveTabs("WorkersBtn");
+            UncheckMenuItems("WorkersBtn");
+        }
+
+        private void ProviderBtn_Checked(object sender, RoutedEventArgs e)
+        {
+            AddAndRemoveTabs("ProviderBtn");
+            UncheckMenuItems("ProviderBtn");
+
+        }
+
+        private void SalesBtn_Checked(object sender, RoutedEventArgs e)
+        {
+            AddAndRemoveTabs("SalesBtn");
+            UncheckMenuItems("SalesBtn");
+        }
+
+        private void SupplyBtn_Checked(object sender, RoutedEventArgs e)
+        {
+            AddAndRemoveTabs("SupplyBtn");
+            UncheckMenuItems("SupplyBtn");
+        }
+
+        private void OrdersBtn_Checked(object sender, RoutedEventArgs e)
+        {
+            AddAndRemoveTabs("OrdersBtn");
+            UncheckMenuItems("OrdersBtn");
         }
     }
-    }
+}
 
 
 
