@@ -11,13 +11,22 @@
     <Grid Background="#FF8D8080" >
 
         <DockPanel x:Name="Leftpanel" HorizontalAlignment="Left"  Height="auto" LastChildFill="False" Margin="0,32,0,-0.333" Width="159" Background="#FF292F33">
+            <DockPanel.Effect>
+                <DropShadowEffect/>
+            </DockPanel.Effect>
             <StackPanel Height="200" VerticalAlignment="Top" Width="159" Margin="0,20,0,0" HorizontalAlignment="Left" >
-                <Button x:Name="AddBtn" Height="35" Width="53" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{x:Null}" IsCancel="True" Click="AddBtn_Click" Foreground="{x:Null}" MouseMove="AddBtn_MouseMove">
+                <Button x:Name="AddBtn" Height="35" Width="53" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{x:Null}" IsCancel="True" Click="AddBtn_Click" Foreground="{x:Null}" >
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
                     <Button.Background>
                         <ImageBrush ImageSource="./img/add1.png" Stretch="Uniform"/>
                     </Button.Background>
                 </Button>
                 <Button x:Name="DeleteBtn" Height="35" Margin="106,-35,0,0" Width="53" Click="DeleteBtn_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
                     <Button.BorderBrush>
                         <ImageBrush/>
                     </Button.BorderBrush>
@@ -26,6 +35,9 @@
                     </Button.Background>
                 </Button>
                 <Button x:Name="EditBtn" Height="35" Margin="53,-35,0,0" Width="53" HorizontalAlignment="Left" BorderBrush="{x:Null}" Click="EditBtn_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
                     <Button.Background>
                         <ImageBrush Stretch="Uniform" ImageSource="./img/edit1.png"/>
                     </Button.Background>
@@ -47,22 +59,52 @@
         </DockPanel>
 
         <DockPanel x:Name="RightPanel" HorizontalAlignment="Right" Height="auto" Margin="620,32,0,-0.333" Width="173" Grid.Column="1" Background="#FF292F33" Grid.RowSpan="2" Grid.ColumnSpan="2" LastChildFill="False">
-            <Calendar x:Name="MainCal" Height="173" Margin="4,-6,-3.667,5.667" DockPanel.Dock="Top" Panel.ZIndex="10" IsEnabled="False"/>
+            <Calendar x:Name="MainCal" Height="173" Margin="4,-6,-3.667,5.667" DockPanel.Dock="Top" Panel.ZIndex="10" IsEnabled="False">
+                <Calendar.Effect>
+                    <DropShadowEffect/>
+                </Calendar.Effect>
+            </Calendar>
             <Label x:Name="lbllbl" Content="Label" Height="35" VerticalAlignment="Top" Margin="20,5,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left" Width="154"/>
             <Label x:Name="lbb" Content="Label" Height="35" VerticalAlignment="Top" Margin="20,5,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left" Width="154"/>
 
         </DockPanel>
         <Menu x:Name="MainMenu" Height="32" VerticalAlignment="Top" Width="auto" HorizontalContentAlignment="Stretch" Margin="0,0,0.333,0" Background="#292F33" Grid.ColumnSpan="2" BorderBrush="#FFBCCAD6" Foreground="#E1E8ED" >
-          
-            <MenuItem x:Name="CustomersBtn" Header="Customers" IsCheckable="True" Height="31" IsEnabled="False" Checked="CustomersBtn_Checked">
+            <Menu.Effect>
+                <DropShadowEffect/>
+            </Menu.Effect>
+
+            <MenuItem x:Name="CustomersBtn" Header="Customers" IsCheckable="True" Height="31" IsEnabled="False" Checked="CustomersBtn_Checked" Unchecked="CustomersBtn_Unchecked">
+                <MenuItem.Effect>
+                    <DropShadowEffect/>
+                </MenuItem.Effect>
                 <Button Content="Connect"/>
                 <Button Content="Change User"/>
             </MenuItem>
-            <MenuItem x:Name="WorkersBtn" Header="Workers" IsCheckable="True" IsEnabled="False" Checked="WorkersBtn_Checked"/>
-            <MenuItem x:Name="ProviderBtn" Header="Provider" IsCheckable="True" IsEnabled="False" Checked="ProviderBtn_Checked"/>
-            <MenuItem x:Name="SalesBtn" Header="Sales" IsCheckable="True" IsEnabled="False" Checked="SalesBtn_Checked"/>
-            <MenuItem x:Name="SupplyBtn" Header="Supply" IsEnabled="False" Checked="SupplyBtn_Checked" IsCheckable="True"/>
-            <MenuItem x:Name="OrdersBtn" Header="Orders" IsCheckable="True" IsEnabled="False" Checked="OrdersBtn_Checked"/>
+            <MenuItem x:Name="WorkersBtn" Header="Workers" IsCheckable="True" IsEnabled="False" Checked="WorkersBtn_Checked" Unchecked="WorkersBtn_Unchecked">
+                <MenuItem.Effect>
+                    <DropShadowEffect/>
+                </MenuItem.Effect>
+            </MenuItem>
+            <MenuItem x:Name="ProviderBtn" Header="Provider" IsCheckable="True" IsEnabled="False" Checked="ProviderBtn_Checked" Unchecked="ProviderBtn_Unchecked">
+                <MenuItem.Effect>
+                    <DropShadowEffect/>
+                </MenuItem.Effect>
+            </MenuItem>
+            <MenuItem x:Name="SalesBtn" Header="Sales" IsCheckable="True" IsEnabled="False" Checked="SalesBtn_Checked" Unchecked="SalesBtn_Unchecked">
+                <MenuItem.Effect>
+                    <DropShadowEffect/>
+                </MenuItem.Effect>
+            </MenuItem>
+            <MenuItem x:Name="SupplyBtn" Header="Supply" IsEnabled="False" Checked="SupplyBtn_Checked" IsCheckable="True" Unchecked="SupplyBtn_Unchecked">
+                <MenuItem.Effect>
+                    <DropShadowEffect/>
+                </MenuItem.Effect>
+            </MenuItem>
+            <MenuItem x:Name="OrdersBtn" Header="Orders" IsCheckable="True" IsEnabled="False" Checked="OrdersBtn_Checked" Unchecked="OrdersBtn_Unchecked">
+                <MenuItem.Effect>
+                    <DropShadowEffect/>
+                </MenuItem.Effect>
+            </MenuItem>
         </Menu>
         <Grid HorizontalAlignment="Left" Height="100" Margin="164,128,0,0" VerticalAlignment="Top" Width="0" Grid.Column="1"/>
         <DockPanel x:Name="centerpanel" Height="auto" Width="auto" LastChildFill="true" Margin="155,32,158.333,-0.333" RenderTransformOrigin="-0.14,-0.127" Grid.Column="1" Background="#CCD6DD">
@@ -89,9 +131,13 @@
                 <TabItem x:Name="CustomersInfoTab" Header="Customers Info" Margin="-5,-5,0.333,0" Background="#CCD6DD" >
                     <Grid>
                         <Grid Height="390" Background="#FFE11818" Margin="0,0,0,0" VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="13*"/>
+                                <ColumnDefinition Width="324*"/>
+                            </Grid.ColumnDefinitions>
 
 
-                            <DataGrid CanUserReorderColumns="True" x:Name = "CustomersInfoTable" Width="auto" Height="390" AlternatingRowBackground = "#FFBCCAD6" ItemsSource="{Binding workersInfo}"  CanUserResizeColumns="False" AutoGenerateColumns="False" VerticalAlignment="Top" Margin="0">
+                            <DataGrid CanUserReorderColumns="True" x:Name = "CustomersInfoTable" Width="auto" Height="390" AlternatingRowBackground = "#FFBCCAD6" ItemsSource="{Binding workersInfo}"  CanUserResizeColumns="False" AutoGenerateColumns="False" VerticalAlignment="Top" Margin="0,0,0.334,0" Grid.ColumnSpan="2">
 
                                 <DataGrid.Columns>
 
@@ -104,6 +150,7 @@
 
                             </DataGrid>
                         </Grid>
+                        <Label x:Name="lbb_Copy" Content="Label" Height="35" VerticalAlignment="Top" Margin="255,434,0,0" HorizontalAlignment="Left" Width="154"/>
 
 
 
@@ -112,7 +159,7 @@
                 <TabItem x:Name="SalesTab" Header="Sales" Margin="-5,-5,0.333,0" Background="#CCD6DD">
                     <Grid>
                         <Grid Height="390" Background="#FFE11818" Margin="0,0,0.333,0" VerticalAlignment="Top">
-                       
+
 
                             <DataGrid CanUserReorderColumns="True" x:Name = "SalesTable" Width="auto" Height="390" AlternatingRowBackground = "#FFBCCAD6" ItemsSource="{Binding workersInfo}"  CanUserResizeColumns="False" AutoGenerateColumns="False" VerticalAlignment="Top" Margin="0">
 
@@ -135,7 +182,7 @@
                 <TabItem x:Name="WorkersInfoTab" Header="Workers Info" Margin="0,-5,0,0.333" HorizontalAlignment="Right" Width="79" Background="#CCD6DD">
                     <Grid>
                         <Grid Height="390" Background="#FFE11818" Margin="0,0,0.333,0" VerticalAlignment="Top">
-                               
+
 
                             <DataGrid CanUserReorderColumns="True" x:Name = "WorkerInfoTable" Width="auto" Height="390" AlternatingRowBackground = "#FFBCCAD6" ItemsSource="{Binding workersInfo}"  CanUserResizeColumns="False" AutoGenerateColumns="False" VerticalAlignment="Top" Margin="0">
 
@@ -155,28 +202,9 @@
 
                     </Grid>
                 </TabItem>
-                <TabItem x:Name="WorkersHours" Header="Workers Hours" Margin="-5,-5,0.333,0" Background="#CCD6DD">
+                <TabItem x:Name="WorkersHoursTab" Header="Workers Hours" Margin="-5,-5,0.333,0" Background="#CCD6DD">
 
-                    <Grid>
-                        <Grid Height="390" Background="#FFE11818" Margin="0,0,0.333,0" VerticalAlignment="Top">
-                            
-                            <DataGrid CanUserReorderColumns="True" x:Name = "WorkersHoursTable" Width="auto" Height="390" AlternatingRowBackground = "#FFBCCAD6" ItemsSource="{Binding workersInfo}"  CanUserResizeColumns="False" AutoGenerateColumns="False" VerticalAlignment="Top" Margin="0">
-
-                                <DataGrid.Columns>
-
-                                    <DataGridTextColumn  Binding="{Binding FullName }" Header="Name" IsReadOnly="True" Width="auto"/>
-                                    <DataGridTextColumn Binding="{Binding CalcAge}" Header="Age" IsReadOnly="True" Width="auto"/>
-                                    <DataGridTextColumn Binding="{Binding Class}" Header="Class" IsReadOnly="True" Width="auto"/>
-                                    <DataGridTextColumn Binding="{Binding Role}" Header="Role" IsReadOnly="True" Width="auto"/>
-                                </DataGrid.Columns>
-
-
-                            </DataGrid>
-                        </Grid>
-
-
-
-                    </Grid>
+                    <Border BorderBrush="Black" BorderThickness="1" Height="100" Width="100"/>
                 </TabItem>
 
 
