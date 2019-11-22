@@ -15,8 +15,9 @@ using System.Windows.Shapes;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
+using System.IO;
 namespace WpfApp1
-    
+
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -29,43 +30,43 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
-        
+
             mainTabs.Items.Remove(SalesTab);
             mainTabs.Items.Remove(WorkersInfoTab);
             mainTabs.Items.Remove(WorkersHoursTab);
             mainTabs.Items.Remove(CustomersInfoTab);
-           
+
             WorkerInfoTable.RowHeaderWidth = 0;
             workersInfo = new List<Worker>();
-           
+
             Worker a = new Worker();
             a.FirstName = "Amir";
             a.LastName = "Amitay";
             a.Phone = "0541111111";
             a.Role = "Manager";
             a.Class = "Manager";
-           
+
             Order o = new Order();
-           
+
             Customer c = createNewCustomer();
             o.Customer = c;
-           
+
             DateTime date = new DateTime(1993, 3, 30).Date;
-           
+
             a.CalcAge();
             a.DateOfBirth = date.Date;
-           
+
             workersInfo.Add(a);
             WorkerInfoTable.ItemsSource = workersInfo;
-           
+
 
             UserNameTextBox.Text = "amir";
             PasswordTextBox.Password = "1234";
 
             Event e = new Event();
-            e.When= new DateTime(2019, 11, 23).Date;
-            MainCal.SelectedDate=  new DateTime(2019, 11, 23).Date;
-            
+            e.When = new DateTime(2019, 11, 23).Date;
+            MainCal.SelectedDate = new DateTime(2019, 11, 23).Date;
+
 
         }
         public Customer createNewCustomer()
@@ -93,7 +94,7 @@ namespace WpfApp1
                     i.IsEnabled = false;
                     i.IsChecked = false;
                 }
-                    
+
                 foreach (MenuItem i in SideMenu.Items)
                     i.IsEnabled = false;
                 MainCal.IsEnabled = false;
@@ -112,7 +113,6 @@ namespace WpfApp1
                 if (PasswordTextBox.Password.Equals("1234"))
                 {
                     isLogin = true;
-                    MessageBox.Show("Login");
                     EnableMenus();
                     CustomersBtn.IsChecked = true;
                     mainTabs.Items.Remove(LoginTab);
@@ -124,12 +124,24 @@ namespace WpfApp1
                 MessageBox.Show("Not login");
         }
 
-   
+        private void UserNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (UserNameTextBox.Text.Equals("amir"))
+                CheckImg.Visibility = Visibility.Visible;
+            else 
+                CheckImg.Visibility = Visibility.Hidden;
+        }
 
         private void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
+
+
+
+
+
+
         //LeftPanel Control
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -169,6 +181,13 @@ namespace WpfApp1
         {
             Logout();
         }
+
+
+
+
+
+
+
         //MainTabs Control
         public void AddAndRemoveTabs(string menuItem)
         {
@@ -218,6 +237,11 @@ namespace WpfApp1
                     break;
             }
         }
+
+
+
+
+
         //MainMenu Control
         public void UncheckMenuItems(string menuItem)
         {
@@ -279,8 +303,8 @@ namespace WpfApp1
         private void OrdersBtn_Unchecked(object sender, RoutedEventArgs e)
         {
         }
-        
-        
+
+
         //Right Panel Control
         //Calander Control
         private void MainCal_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
@@ -289,8 +313,8 @@ namespace WpfApp1
                 return;
 
             string str = sender.ToString();
-           
-           
+
+
             DateTime selectedDate = DateTime.Parse(str);
             MainCal.SelectedDate = selectedDate;
 
@@ -301,6 +325,6 @@ namespace WpfApp1
 
         }
 
-   
+
     }
 }
