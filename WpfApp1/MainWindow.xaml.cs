@@ -124,17 +124,7 @@ namespace WpfApp1
                 MessageBox.Show("Not login");
         }
 
-        private void UserNameTextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            UserNameTextBox.Text = "";
-        }
-
-        private void UserNameTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(UserNameTextBox.Text))
-                UserNameTextBox.Text = "User Name";
-        }
-
+   
 
         private void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
