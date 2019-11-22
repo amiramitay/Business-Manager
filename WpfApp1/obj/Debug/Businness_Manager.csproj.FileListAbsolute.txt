@@ -12,4 +12,5 @@ C:\Projects\Business-Manager\WpfApp1\obj\Debug\Businness_Manager.csproj.Generate
 C:\Projects\Business-Manager\WpfApp1\obj\Debug\WpfApp1.exe
 C:\Projects\Business-Manager\WpfApp1\obj\Debug\WpfApp1.pdb
 C:\Projects\Business-Manager\WpfApp1\obj\Debug\Businness_Manager.csprojAssemblyReference.cache
-C:\Projects\Business-Manager\WpfApp1\obj\Debug\WpfApp1.Form1.resources
+C:\Projects\Business-Manager\WpfApp1\obj\Debug\NewEvent.g.cs
+C:\Projects\Business-Manager\WpfApp1\obj\Debug\NewEvent.baml

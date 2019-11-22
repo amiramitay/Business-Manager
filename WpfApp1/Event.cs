@@ -9,7 +9,7 @@ namespace WpfApp1
     class Event
     {
         public System.DateTime When { get; set; }
-        public String Title { get; set; }
+        public String Name { get; set; }
         public String Description { get; set; }
 
     }

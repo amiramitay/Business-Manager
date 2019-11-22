@@ -333,7 +333,8 @@ namespace WpfApp1
             else
             {
                // Page page = new NewEvent();
-              //  Window window = new NewEvent(); 
+                Window w = new NewEvent();
+                w.Show();
             }
                 
         }
