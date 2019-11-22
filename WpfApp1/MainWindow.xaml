@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="Business Manager" Height="600" Width="1000" Background="White"  MinWidth="1000" MinHeight="600"
+        Title="Business Manager" Height="600" Width="1000" Background="White"  MinWidth="800" MinHeight="600"
         Icon="./img/icon.png"
         >
     <Grid Background="#FF8D8080" >
@@ -56,6 +56,9 @@
 
             </StackPanel>
             <Button x:Name="LogoutBtn" Content="" Height="46" VerticalAlignment="Bottom" Width="152" Margin="-155,0,0,1.667" HorizontalAlignment="Left" Click="LogoutBtn_Click" BorderBrush="{x:Null}">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
                 <Button.Background>
                     <ImageBrush ImageSource="./img/logout.png" Stretch="Uniform"/>
                 </Button.Background>
@@ -75,8 +78,7 @@
                 </Calendar.Effect>
             </Calendar>
             <StackPanel Height="378" VerticalAlignment="Top" Width="173" Margin="0,0,0,-0.333" HorizontalAlignment="Left">
-                <Button x:Name="NewEventBtn" Content="New Event" Height="35
-                        " VerticalAlignment="Top" Margin="0" Background="#FF292F33" Foreground="#FFE1E8ED" BorderBrush="{x:Null}" Click="NewEventBtn_Click"/>
+                <Button x:Name="NewEventBtn" Content="New Event" Height="35" VerticalAlignment="Top" Margin="12,0,0,0" Background="#FF292F33" Foreground="#FFE1E8ED" BorderBrush="{x:Null}" Click="NewEventBtn_Click"/>
             </StackPanel>
 
 
@@ -135,10 +137,28 @@
                             <TextBox x:Name="UserNameTextBox" HorizontalAlignment="Left" Height="23" Margin="232,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" SelectionBrush="#FF292F33" Foreground="#FF292F33" BorderBrush="#FF292F33" TextChanged="UserNameTextBox_TextChanged" />
                             <PasswordBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Margin="232,225,0,0" VerticalAlignment="Top" Width="120" Height="23" SelectionBrush="#FF292F33" Foreground="#FF292F33" BorderBrush="#FF292F33"/>
 
-                            <Image x:Name="UserImg" HorizontalAlignment="Left" Height="32" Margin="103,176,0,0" VerticalAlignment="Top" Width="32" Panel.ZIndex="100" Source="./img/users.png"/>
-                            <Image HorizontalAlignment="Left" Height="32" Margin="103,225,0,0" VerticalAlignment="Top" Width="32" Source="./img/pass.png"/>
+                            <Image x:Name="UserImg" HorizontalAlignment="Left" Height="32" Margin="103,176,0,0" VerticalAlignment="Top" Width="32" Panel.ZIndex="100" Source="./img/users.png">
+                                <Image.Effect>
+                                    <DropShadowEffect/>
+                                </Image.Effect>
+                            </Image>
+                            <Image HorizontalAlignment="Left" Height="32" Margin="103,225,0,0" VerticalAlignment="Top" Width="32" Source="./img/pass.png">
+                                <Image.Effect>
+                                    <DropShadowEffect/>
+                                </Image.Effect>
+                            </Image>
+                            <Image x:Name="CheckImg" HorizontalAlignment="Left" Height="32" Margin="368,172,0,0" VerticalAlignment="Top" Width="32" Source="./img/shield.png" Visibility="Hidden">
+                                <Image.Effect>
+                                    <DropShadowEffect/>
+                                </Image.Effect>
+                            </Image>
+
+                            <Image Height="150" Margin="175,0" VerticalAlignment="Top" Source="./img/briefcase.png">
+                                <Image.Effect>
+                                    <DropShadowEffect/>
+                                </Image.Effect>
+                            </Image>
                         </Grid>
-                        <Image x:Name="CheckImg" HorizontalAlignment="Left" Height="32" Margin="459,176,0,0" VerticalAlignment="Top" Width="32" Source="./img/shield.png" Visibility="Hidden"/>
 
 
 

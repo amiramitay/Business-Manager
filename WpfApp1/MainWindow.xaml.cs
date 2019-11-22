@@ -86,25 +86,31 @@ namespace WpfApp1
         }
         public void Logout()
         {
-            if (MessageBox.Show("Are you sure?", "", MessageBoxButton.YesNo).ToString().Equals("Yes"))
+            if (isLogin)
             {
-                isLogin = false;
-                foreach (MenuItem i in MainMenu.Items)
+                if (MessageBox.Show("Are you sure?", "", MessageBoxButton.YesNo).ToString().Equals("Yes"))
                 {
-                    i.IsEnabled = false;
-                    i.IsChecked = false;
-                }
+                    isLogin = false;
+                    foreach (MenuItem i in MainMenu.Items)
+                    {
+                        i.IsEnabled = false;
+                        i.IsChecked = false;
+                    }
 
-                foreach (MenuItem i in SideMenu.Items)
-                    i.IsEnabled = false;
-                MainCal.IsEnabled = false;
-                mainTabs.Items.Add(LoginTab);
-                LoginTab.IsSelected = true;
+                    foreach (MenuItem i in SideMenu.Items)
+                        i.IsEnabled = false;
+                    MainCal.IsEnabled = false;
+                    mainTabs.Items.Add(LoginTab);
+                    LoginTab.IsSelected = true;
+                }
+                else
+                {
+                    return;
+                }
             }
             else
-            {
                 return;
-            }
+           
         }
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -322,7 +328,14 @@ namespace WpfApp1
 
         private void NewEventBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!isLogin)
+                return;
+            else
+            {
+               // Page page = new NewEvent();
+              //  Window window = new NewEvent(); 
+            }
+                
         }
 
 
