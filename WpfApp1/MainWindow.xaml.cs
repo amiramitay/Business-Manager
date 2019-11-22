@@ -16,6 +16,7 @@ using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 namespace WpfApp1
+    
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -28,37 +29,43 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
-            //foreach (TabItem t in mainTabs.Items)
-            //{
-            //    if (!t.Name.Equals("LoginTab"))
-            //        t.Visibility = Visibility.Hidden;
-            //}
+        
             mainTabs.Items.Remove(SalesTab);
             mainTabs.Items.Remove(WorkersInfoTab);
             mainTabs.Items.Remove(WorkersHoursTab);
             mainTabs.Items.Remove(CustomersInfoTab);
+           
             WorkerInfoTable.RowHeaderWidth = 0;
             workersInfo = new List<Worker>();
+           
             Worker a = new Worker();
             a.FirstName = "Amir";
             a.LastName = "Amitay";
             a.Phone = "0541111111";
             a.Role = "Manager";
             a.Class = "Manager";
+           
             Order o = new Order();
+           
             Customer c = createNewCustomer();
             o.Customer = c;
+           
             DateTime date = new DateTime(1993, 3, 30).Date;
+           
             a.CalcAge();
             a.DateOfBirth = date.Date;
+           
             workersInfo.Add(a);
             WorkerInfoTable.ItemsSource = workersInfo;
-            lbllbl.Content = o.Customer.Name;
-            lbb.Content = a.CalcAge();
+           
 
             UserNameTextBox.Text = "amir";
             PasswordTextBox.Password = "1234";
 
+            Event e = new Event();
+            e.When= new DateTime(2019, 11, 23).Date;
+            MainCal.SelectedDate=  new DateTime(2019, 11, 23).Date;
+            
 
         }
         public Customer createNewCustomer()
@@ -66,6 +73,8 @@ namespace WpfApp1
             Customer c = new Customer("amraa", true, "000", "aaa");
             return c;
         }
+
+        //Login Register Control
         private void EnableMenus()
         {
             foreach (MenuItem i in MainMenu.Items)
@@ -74,20 +83,26 @@ namespace WpfApp1
                 i.IsEnabled = true;
             MainCal.IsEnabled = true;
         }
-        public void Disconnect()
+        public void Logout()
         {
             if (MessageBox.Show("Are you sure?", "", MessageBoxButton.YesNo).ToString().Equals("Yes"))
             {
                 isLogin = false;
                 foreach (MenuItem i in MainMenu.Items)
+                {
                     i.IsEnabled = false;
+                    i.IsChecked = false;
+                }
+                    
                 foreach (MenuItem i in SideMenu.Items)
                     i.IsEnabled = false;
                 MainCal.IsEnabled = false;
+                mainTabs.Items.Add(LoginTab);
+                LoginTab.IsSelected = true;
             }
             else
             {
-                lbb.Content = "no";
+                return;
             }
         }
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
@@ -110,7 +125,7 @@ namespace WpfApp1
         }
         private void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
-            Disconnect();
+            
         }
         //LeftPanel Control
         private void AddBtn_Click(object sender, RoutedEventArgs e)
@@ -145,6 +160,11 @@ namespace WpfApp1
             {
                 MessageBox.Show("Yes");
             }
+        }
+
+        private void LogoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Logout();
         }
         //MainTabs Control
         public void AddAndRemoveTabs(string menuItem)
@@ -204,17 +224,8 @@ namespace WpfApp1
         }
         private void CustomersBtn_Checked(object sender, RoutedEventArgs e)
         {
-            if (!CustomersBtn.IsChecked)
-            {
-                MessageBox.Show("Check");
-                mainTabs.Items.Remove(CustomersInfoTab);
-            }
-            else
-            {
-                MessageBox.Show("not Check");
-                UncheckMenuItems("CustomersBtn");
-                AddAndRemoveTabs("CustomersBtn");
-            }
+            UncheckMenuItems("CustomersBtn");
+            AddAndRemoveTabs("CustomersBtn");
         }
         private void WorkersBtn_Checked(object sender, RoutedEventArgs e)
         {
@@ -264,6 +275,27 @@ namespace WpfApp1
         }
         private void OrdersBtn_Unchecked(object sender, RoutedEventArgs e)
         {
+        }
+        
+        
+        //Right Panel Control
+        //Calander Control
+        private void MainCal_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!isLogin)
+                return;
+
+            string str = sender.ToString();
+           
+           
+            DateTime selectedDate = DateTime.Parse(str);
+            MainCal.SelectedDate = selectedDate;
+
+        }
+
+        private void NewEventBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

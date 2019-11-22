@@ -14,7 +14,7 @@
             <DockPanel.Effect>
                 <DropShadowEffect/>
             </DockPanel.Effect>
-            <StackPanel Height="200" VerticalAlignment="Top" Width="159" Margin="0,20,0,0" HorizontalAlignment="Left" >
+            <StackPanel Height="77" VerticalAlignment="Top" Width="159" Margin="0,20,0,0" HorizontalAlignment="Left" >
                 <Button x:Name="AddBtn" Height="35" Width="53" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{x:Null}" IsCancel="True" Click="AddBtn_Click" Foreground="{x:Null}" >
                     <Button.Effect>
                         <DropShadowEffect/>
@@ -51,21 +51,34 @@
                     </MenuItem>
                 </Menu>
 
+
+
+
             </StackPanel>
+            <Button x:Name="LogoutBtn" Content="" Height="46" VerticalAlignment="Bottom" Width="152" Margin="-155,0,0,1.667" HorizontalAlignment="Left" Click="LogoutBtn_Click" BorderBrush="{x:Null}">
+                <Button.Background>
+                    <ImageBrush ImageSource="./img/logout.png" Stretch="Uniform"/>
+                </Button.Background>
+            </Button>
+
+
 
 
 
 
         </DockPanel>
 
-        <DockPanel x:Name="RightPanel" HorizontalAlignment="Right" Height="auto" Margin="620,32,0,-0.333" Width="173" Grid.Column="1" Background="#FF292F33" Grid.RowSpan="2" Grid.ColumnSpan="2" LastChildFill="False">
-            <Calendar x:Name="MainCal" Height="173" Margin="4,-6,-3.667,5.667" DockPanel.Dock="Top" Panel.ZIndex="10" IsEnabled="False">
+        <DockPanel x:Name="RightPanel" HorizontalAlignment="Right" Height="auto" Margin="620,26,0,-0.333" Width="173" Grid.Column="1" Background="#FF292F33" Grid.RowSpan="2" Grid.ColumnSpan="2" LastChildFill="False">
+            <Calendar x:Name="MainCal" Height="161" Margin="4,0,-8.667,0" DockPanel.Dock="Top" Panel.ZIndex="10" SelectedDatesChanged="MainCal_SelectedDatesChanged" Background="#FFCCD6DD" Foreground="{x:Null}" BorderBrush="{x:Null}" OpacityMask="#FFFC0000">
                 <Calendar.Effect>
                     <DropShadowEffect/>
                 </Calendar.Effect>
             </Calendar>
-            <Label x:Name="lbllbl" Content="Label" Height="35" VerticalAlignment="Top" Margin="20,5,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left" Width="154"/>
-            <Label x:Name="lbb" Content="Label" Height="35" VerticalAlignment="Top" Margin="20,5,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left" Width="154"/>
+            <StackPanel Height="378" VerticalAlignment="Top" Width="173" Margin="0,0,0,-0.333" HorizontalAlignment="Left">
+                <Button Content="New Event" Height="35
+                        " VerticalAlignment="Top" Margin="0" Background="#FF292F33" Foreground="#FFE1E8ED" BorderBrush="{x:Null}"/>
+            </StackPanel>
+
 
         </DockPanel>
         <Menu x:Name="MainMenu" Height="32" VerticalAlignment="Top" Width="auto" HorizontalContentAlignment="Stretch" Margin="0,0,0.333,0" Background="#292F33" Grid.ColumnSpan="2" BorderBrush="#FFBCCAD6" Foreground="#E1E8ED" >
@@ -108,7 +121,7 @@
         </Menu>
         <Grid HorizontalAlignment="Left" Height="100" Margin="164,128,0,0" VerticalAlignment="Top" Width="0" Grid.Column="1"/>
         <DockPanel x:Name="centerpanel" Height="auto" Width="auto" LastChildFill="true" Margin="155,32,158.333,-0.333" RenderTransformOrigin="-0.14,-0.127" Grid.Column="1" Background="#CCD6DD">
-            <TabControl x:Name="mainTabs" Background="#FF55ACEE" BorderBrush="#FF55ACEE">
+            <TabControl x:Name="mainTabs" Background="#FF55ACEE" BorderBrush="#FF55ACEE" Margin="0">
                 <TabItem x:Name="LoginTab" Header="Login" Margin="-5,-5,0.333,0" Background="#CCD6DD">
                     <Grid Background="#FF55ACEE">
                         <Grid Height="500" Margin="50,10" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500">
