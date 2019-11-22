@@ -75,8 +75,8 @@
                 </Calendar.Effect>
             </Calendar>
             <StackPanel Height="378" VerticalAlignment="Top" Width="173" Margin="0,0,0,-0.333" HorizontalAlignment="Left">
-                <Button Content="New Event" Height="35
-                        " VerticalAlignment="Top" Margin="0" Background="#FF292F33" Foreground="#FFE1E8ED" BorderBrush="{x:Null}"/>
+                <Button x:Name="NewEventBtn" Content="New Event" Height="35
+                        " VerticalAlignment="Top" Margin="0" Background="#FF292F33" Foreground="#FFE1E8ED" BorderBrush="{x:Null}" Click="NewEventBtn_Click"/>
             </StackPanel>
 
 
@@ -126,16 +126,19 @@
                     <Grid Background="#FF55ACEE">
                         <Grid Height="500" Margin="50,10" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="323*"/>
-                                <ColumnDefinition Width="178*"/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Button x:Name="RegisterBtn" Content="Register" HorizontalAlignment="Left" Margin="270,278,0,0" VerticalAlignment="Top" Width="75" Foreground="#FF292F33" BorderBrush="#FF292F33" Click="RegisterBtn_Click" Background="#FFCCD6DD" Grid.ColumnSpan="2"/>
+                            <Button x:Name="RegisterBtn" Content="Register" HorizontalAlignment="Left" Margin="270,278,0,0" VerticalAlignment="Top" Width="75" Foreground="#FF292F33" BorderBrush="#FF292F33" Click="RegisterBtn_Click" Background="#FFCCD6DD"/>
                             <Button x:Name="LoginBtn" Content="Login" HorizontalAlignment="Left" Margin="134,278,0,0" VerticalAlignment="Top" Width="75" Foreground="#FF292F33" BorderBrush="#FF292F33" Background="#FFCCD6DD" Click="LoginBtn_Click"/>
-                            <Label Content="User Name" HorizontalAlignment="Left" Margin="134,173,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FF292F33"/>
-                            <Label Content="Password" HorizontalAlignment="Left" Margin="134,225,0,0" VerticalAlignment="Top" Foreground="#FF292F33"/>
-                            <TextBox x:Name="UserNameTextBox" HorizontalAlignment="Left" Height="23" Margin="223,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" SelectionBrush="#FF292F33" Foreground="#FF292F33" Grid.ColumnSpan="2"/>
-                            <PasswordBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Margin="221,230,0,0" VerticalAlignment="Top" Width="120" Height="23" SelectionBrush="#FF292F33" Foreground="#FF292F33" Grid.ColumnSpan="2"/>
+                            <Label Content="User Name" HorizontalAlignment="Left" Margin="149,176,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FF292F33"/>
+                            <Label Content="Password" HorizontalAlignment="Left" Margin="149,225,0,0" VerticalAlignment="Top" Foreground="#FF292F33"/>
+                            <TextBox x:Name="UserNameTextBox" HorizontalAlignment="Left" Height="23" Margin="232,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" SelectionBrush="#FF292F33" Foreground="#FF292F33" GotFocus="UserNameTextBox_GotFocus" LostFocus="UserNameTextBox_LostFocus"/>
+                            <PasswordBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Margin="232,225,0,0" VerticalAlignment="Top" Width="120" Height="23" SelectionBrush="#FF292F33" Foreground="#FF292F33"/>
+                           
+                            <Image x:Name="UserImg" HorizontalAlignment="Left" Height="32" Margin="103,176,0,0" VerticalAlignment="Top" Width="32" Panel.ZIndex="100" Source="./img/users.png"/>
+                            <Image HorizontalAlignment="Left" Height="32" Margin="103,225,0,0" VerticalAlignment="Top" Width="32" Source="./img/pass.png"/>
                         </Grid>
+
 
 
 

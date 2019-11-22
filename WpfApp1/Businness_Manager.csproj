@@ -154,5 +154,14 @@
   <ItemGroup>
     <Resource Include="img\logout.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\shield.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\users.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\pass.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
