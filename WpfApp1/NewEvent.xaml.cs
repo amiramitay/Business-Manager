@@ -23,5 +23,30 @@ namespace WpfApp1
         {
             InitializeComponent();
         }
+
+        private void NewEventBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (!EventDate.SelectedDate.HasValue || EventTitle.Text.Equals(""))
+            {
+                    if (!EventDate.SelectedDate.HasValue)
+                        MessageBox.Show("Please Select Date");
+                    else
+                        MessageBox.Show("Please Enter Title");
+            }
+            else
+            {
+                if (EventDate.SelectedDate < System.DateTime.Today)
+                    MessageBox.Show("You can't create event at the past");
+                else
+                {
+                    Event newEvent = new Event();
+                    newEvent.Title = EventTitle.Text;
+                    newEvent.When = EventDate.SelectedDate.Value;
+                    newEvent.Description = EventDescription.Text;
+                    MessageBox.Show("When: " + newEvent.When.ToString() + "\n Title: " + newEvent.Title + "\n Descriptopn: " + newEvent.Description);
+                }
+            }
+        }
     }
 }
+

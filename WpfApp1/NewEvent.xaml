@@ -5,18 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="NewEvent" MaxWidth="500" MaxHeight="500" Height="300" Width="300" ResizeMode="NoResize">
-    <Grid Margin="0">
-        <DatePicker Name="EventDate" Margin="150,64,39.667,0" VerticalAlignment="Top"/>
-        <Label Content="When" HorizontalAlignment="Left" Margin="51,64,0,0" VerticalAlignment="Top"/>
-        <Label Content="Event" HorizontalAlignment="Left" Margin="51,109,0,0" VerticalAlignment="Top"/>
-        <RichTextBox HorizontalAlignment="Left" Height="25" Margin="150,109,0,0" VerticalAlignment="Top" Width="105">
-            <FlowDocument>
-                <Paragraph>
-                    <Run Text="RichTextBox"/>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
+        Title="New Event" MaxWidth="500" MaxHeight="500" Height="300" Width="300" ResizeMode="NoResize" WindowStyle="ThreeDBorderWindow" Icon="img/calendar.png" WindowStartupLocation="CenterScreen">
+    <Grid Margin="0" Background="#FFE1E8ED">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DatePicker Name="EventDate" Margin="150,34,27.667,0" VerticalAlignment="Top" SelectedDateFormat="Short" IsTodayHighlighted="True"/>
+        <Label Content="When" HorizontalAlignment="Left" Margin="39,34,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="#FF292F33"/>
+        <Label Content="Event Title" HorizontalAlignment="Left" Margin="39,76,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="#FF292F33"/>
+        <TextBox x:Name="EventDescription" HorizontalAlignment="Left" Height="91" Margin="150,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="105" AcceptsReturn="True" AcceptsTab="True"/>
+        <Button x:Name="NewEventBtn" Content="Add To Calander" Margin="94,232,93.667,0" VerticalAlignment="Top" Click="NewEventBtn_Click" Background="White"/>
+        <TextBox x:Name="EventTitle" HorizontalAlignment="Left" Height="23" Margin="150,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="105"/>
+        <Label Content="Event Description" HorizontalAlignment="Left" Margin="39,122,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="#FF292F33"/>
 
     </Grid>
 </Window>
