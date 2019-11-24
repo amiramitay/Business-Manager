@@ -27,6 +27,7 @@ namespace WpfApp1
         public List<Worker> workersInfo { get; set; }
         public bool isLogin = false;
         public bool isAdmin = false;
+        public bool isEventTab = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -115,7 +116,7 @@ namespace WpfApp1
         }
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (UserNameTextBox.Text.Equals("amir"))
+           if (UserNameTextBox.Text.Equals("amir"))
             {
                 if (PasswordTextBox.Password.Equals("1234"))
                 {
@@ -152,7 +153,7 @@ namespace WpfApp1
         //LeftPanel Control
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (!isLogin)
+            if (!isLogin || isEventTab)
             {
                 return;
             }
@@ -163,7 +164,7 @@ namespace WpfApp1
         }
         private void EditBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (!isLogin)
+            if (!isLogin || isEventTab)
             {
                 return;
             }
@@ -174,7 +175,7 @@ namespace WpfApp1
         }
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (!isLogin)
+            if (!isLogin || isEventTab)
             {
                 return;
             }
@@ -327,6 +328,8 @@ namespace WpfApp1
         }
         Event newEvent = new Event();
         int selectedIndex = 0;
+
+        //New Event Control
         private void NewEventBtn_Click(object sender, RoutedEventArgs e)
         {
             if (!isLogin)
@@ -338,22 +341,107 @@ namespace WpfApp1
                 foreach (MenuItem i in MainMenu.Items)
                     i.IsEnabled = false;
 
-                mainTabs.Items.Add(NewEventTab);
+                GroupByBtn.IsEnabled = true;
+                SortByBtn.IsEnabled = true;
+
                 selectedIndex = mainTabs.SelectedIndex;
+                mainTabs.Items.Clear();
+                mainTabs.Items.Add(NewEventTab);
                 mainTabs.SelectedItem = NewEventTab;
+                isEventTab = true;
+                SortByBtn.Visibility = Visibility.Hidden;
+                GroupByBtn.Visibility = Visibility.Hidden;
+
             }
 
         }
 
         private void ExitNewEventTab_Click(object sender, RoutedEventArgs e)
         {
+            foreach (MenuItem i in MainMenu.Items)
+            {
+                i.IsEnabled = true;
+                if(i.IsChecked)
+                {
+                    i.IsChecked = false;
+                    i.IsChecked = true;
+
+                }
+            }
+
             foreach (TabItem t in mainTabs.Items)
                 t.IsEnabled = true;
-            foreach (MenuItem i in MainMenu.Items)
-                i.IsEnabled = true;
 
+              
             mainTabs.Items.Remove(NewEventTab);
             mainTabs.SelectedIndex = selectedIndex;
+            GroupByBtn.IsEnabled = true;
+            SortByBtn.IsEnabled = true;
+            isEventTab = false;
+            SortByBtn.Visibility = Visibility.Visible;
+            GroupByBtn.Visibility = Visibility.Visible;
+        }
+
+        private void AddToCalendar_Click(object sender, RoutedEventArgs e)
+        {
+            if (!EventDate.SelectedDate.HasValue || EventTitle.Text.Equals(""))
+            {
+                if (!EventDate.SelectedDate.HasValue && EventTitle.Text.Equals(""))
+                {
+                    DateValidateLabel.Visibility = Visibility.Visible;
+                    TitleValidateLabel.Visibility= Visibility.Visible;
+                    DateValidateLabel.Content = "Please select date";
+                    TitleValidateLabel.Content = "Please enter title";
+                }
+                else 
+                {
+                    if (EventTitle.Text.Equals(""))
+                    {
+                        if (EventDate.SelectedDate < System.DateTime.Today)
+                            DateValidateLabel.Visibility = Visibility.Visible;
+                        else
+                            DateValidateLabel.Visibility = Visibility.Hidden;
+
+                        TitleValidateLabel.Visibility = Visibility.Visible;
+                        TitleValidateLabel.Content = "Please enter title";
+                    }
+
+                    else
+                    {
+                        DateValidateLabel.Visibility = Visibility.Visible;
+                        DateValidateLabel.Content = "Please select date";
+                        TitleValidateLabel.Visibility = Visibility.Hidden;
+                    }
+
+
+                }
+            }
+            else
+            {
+                TitleValidateLabel.Visibility = Visibility.Hidden;
+                if (EventDate.SelectedDate < System.DateTime.Today)
+                {
+                    DateValidateLabel.Content = "Please select future date";
+                    DateValidateLabel.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    DateValidateLabel.Visibility = Visibility.Hidden;
+                    Event newEvent = new Event();
+                    newEvent.Title = EventTitle.Text;
+                    newEvent.When = EventDate.SelectedDate.Value;
+                    newEvent.Description = EventDescription.Text;
+                    MessageBox.Show("When: " + newEvent.When.ToString() + "\n Title: " + newEvent.Title + "\n Descriptopn: " + newEvent.Description);
+                }
+            }
+        }
+
+        private void EventDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (EventDate.SelectedDate < DateTime.Today)
+                DateValidateLabel.Content = "Please select future date";
+            else
+                DateValidateLabel.Visibility = Visibility.Hidden;
         }
     }
 }
