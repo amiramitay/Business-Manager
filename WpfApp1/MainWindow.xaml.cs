@@ -35,6 +35,7 @@ namespace WpfApp1
             mainTabs.Items.Remove(WorkersInfoTab);
             mainTabs.Items.Remove(WorkersHoursTab);
             mainTabs.Items.Remove(CustomersInfoTab);
+            mainTabs.Items.Remove(NewEventTab);
 
             WorkerInfoTable.RowHeaderWidth = 0;
             workersInfo = new List<Worker>();
@@ -320,29 +321,39 @@ namespace WpfApp1
 
             string str = sender.ToString();
 
-
             DateTime selectedDate = DateTime.Parse(str);
             MainCal.SelectedDate = selectedDate;
 
         }
-
+        Event newEvent = new Event();
+        int selectedIndex = 0;
         private void NewEventBtn_Click(object sender, RoutedEventArgs e)
         {
             if (!isLogin)
                 return;
             else
             {
-               // Page page = new NewEvent();
-                Window w = new NewEvent();
-                Event newEvent= new Event();
-       
-                w.Show();
-               
-                
+                foreach (TabItem t in mainTabs.Items)
+                    t.IsEnabled = false;
+                foreach (MenuItem i in MainMenu.Items)
+                    i.IsEnabled = false;
+
+                mainTabs.Items.Add(NewEventTab);
+                selectedIndex = mainTabs.SelectedIndex;
+                mainTabs.SelectedItem = NewEventTab;
             }
-                
+
         }
 
+        private void ExitNewEventTab_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (TabItem t in mainTabs.Items)
+                t.IsEnabled = true;
+            foreach (MenuItem i in MainMenu.Items)
+                i.IsEnabled = true;
 
+            mainTabs.Items.Remove(NewEventTab);
+            mainTabs.SelectedIndex = selectedIndex;
+        }
     }
 }

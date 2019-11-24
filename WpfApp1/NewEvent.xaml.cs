@@ -19,9 +19,13 @@ namespace WpfApp1
     /// </summary>
     public partial class NewEvent : Window
     {
-        public NewEvent()
+        public NewEvent(DateTime when, string title, string description) 
         {
+           
             InitializeComponent();
+            MessageBox.Show(when.ToString() + title + description);
+            title = "Moshe";
+            MessageBox.Show(title);
         }
 
         private void NewEventBtn_Click(object sender, RoutedEventArgs e)
@@ -44,6 +48,8 @@ namespace WpfApp1
                     newEvent.When = EventDate.SelectedDate.Value;
                     newEvent.Description = EventDescription.Text;
                     MessageBox.Show("When: " + newEvent.When.ToString() + "\n Title: " + newEvent.Title + "\n Descriptopn: " + newEvent.Description);
+                    this.Hide();
+                    
                 }
             }
         }
