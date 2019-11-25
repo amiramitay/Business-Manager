@@ -12,3 +12,5 @@ C:\Projects\Business-Manager\WpfApp1\obj\Release\Businness_Manager.csproj.Genera
 C:\Projects\Business-Manager\WpfApp1\obj\Release\WpfApp1.exe
 C:\Projects\Business-Manager\WpfApp1\obj\Release\WpfApp1.pdb
 C:\Projects\Business-Manager\WpfApp1\obj\Release\Businness_Manager.csprojAssemblyReference.cache
+C:\Projects\Business-Manager\WpfApp1\obj\Release\NewEvent.g.cs
+C:\Projects\Business-Manager\WpfApp1\obj\Release\NewEvent.baml

@@ -27,7 +27,7 @@ namespace WpfApp1
         public Boolean Vip { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public System.DateTime StartWorkWithUs { get; set; }
+        public System.DateTime Join { get; set; }
 
 
     }

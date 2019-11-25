@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("img/delete1.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("img/edit1.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("data/appdb.mdf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("data/appdb_log.ldf")]
 
 
