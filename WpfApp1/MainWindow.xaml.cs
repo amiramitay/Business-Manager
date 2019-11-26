@@ -32,10 +32,12 @@ namespace WpfApp1
         public bool isAdmin = false;
         public bool isEventTab = false;
         public string cn = Properties.Settings.Default.systemDataConnectionString;
+        SqlConnection sqlcn = new SqlConnection(Properties.Settings.Default.systemDataConnectionString);
+
         public MainWindow()
         {
             InitializeComponent();
-
+            Console.WriteLine("Amir");
             mainTabs.Items.Remove(SalesTab);
             mainTabs.Items.Remove(WorkersInfoTab);
             mainTabs.Items.Remove(WorkersHoursTab);
@@ -116,11 +118,11 @@ namespace WpfApp1
             }
             else
                 return;
-           
+
         }
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
-           if (UserNameTextBox.Text.Equals("amir"))
+            if (UserNameTextBox.Text.Equals("amir"))
             {
                 if (PasswordTextBox.Password.Equals("1234"))
                 {
@@ -140,7 +142,7 @@ namespace WpfApp1
         {
             if (UserNameTextBox.Text.Equals("amir"))
                 CheckImg.Visibility = Visibility.Visible;
-            else 
+            else
                 CheckImg.Visibility = Visibility.Hidden;
         }
 
@@ -365,7 +367,7 @@ namespace WpfApp1
             foreach (MenuItem i in MainMenu.Items)
             {
                 i.IsEnabled = true;
-                if(i.IsChecked)
+                if (i.IsChecked)
                 {
                     i.IsChecked = false;
                     i.IsChecked = true;
@@ -376,7 +378,7 @@ namespace WpfApp1
             foreach (TabItem t in mainTabs.Items)
                 t.IsEnabled = true;
 
-              
+
             mainTabs.Items.Remove(NewEventTab);
             mainTabs.SelectedIndex = selectedIndex;
             GroupByBtn.IsEnabled = true;
@@ -393,11 +395,11 @@ namespace WpfApp1
                 if (!EventDate.SelectedDate.HasValue && EventTitle.Text.Equals(""))
                 {
                     DateValidateLabel.Visibility = Visibility.Visible;
-                    TitleValidateLabel.Visibility= Visibility.Visible;
+                    TitleValidateLabel.Visibility = Visibility.Visible;
                     DateValidateLabel.Content = "Please select date";
                     TitleValidateLabel.Content = "Please enter title";
                 }
-                else 
+                else
                 {
                     if (EventTitle.Text.Equals(""))
                     {
@@ -454,17 +456,54 @@ namespace WpfApp1
         {
             LoadDB();
         }
-
         public void LoadDB()
         {
-            SqlConnection sqlcn = new SqlConnection(cn);
+           
             if (sqlcn.State != ConnectionState.Open)
             {
-                MessageBox.Show("Open");
+             //   MessageBox.Show("Open");
                 sqlcn.Open();
             }
             else
                 MessageBox.Show("error");
+            DataSet ds = new DataSet();
+            string queryString =
+                "SELECT * FROM  users;";
+            SqlCommand cmd = new SqlCommand(
+                  queryString, sqlcn);
+
+            abc.Items.Clear();
+            cmd = sqlcn.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = queryString;
+            DataTable dt = new DataTable();
+            cmd.ExecuteNonQuery();
+            SqlDataAdapter ad = new SqlDataAdapter(cmd);
+            ad.Fill(dt);
+            //  ad.Fill(ds);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                abc.Items.Add(dr["User"].ToString());
+                abc.Items.Add(dr["Password"].ToString());
+                abc.Items.Add(dr["Admin"].ToString());
+
+
+            }
+
+
+            //foreach (DataColumn dc in dt.Columns)
+            //    abc.Items.Add(dt.ToString());
+
+            sqlcn.Close();
+
+        }
+
+        private void MainForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (sqlcn.State==ConnectionState.Open)
+                sqlcn.Close();
         }
     }
+       
 }
