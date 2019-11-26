@@ -16,6 +16,9 @@ using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.IO;
+using System.Data;
+using System.Configuration;
+
 namespace WpfApp1
 
 {
@@ -28,6 +31,7 @@ namespace WpfApp1
         public bool isLogin = false;
         public bool isAdmin = false;
         public bool isEventTab = false;
+        public string cn = Properties.Settings.Default.systemDataConnectionString;
         public MainWindow()
         {
             InitializeComponent();
@@ -442,6 +446,25 @@ namespace WpfApp1
                 DateValidateLabel.Content = "Please select future date";
             else
                 DateValidateLabel.Visibility = Visibility.Hidden;
+        }
+
+
+        //DB Control
+        private void MainForm_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadDB();
+        }
+
+        public void LoadDB()
+        {
+            SqlConnection sqlcn = new SqlConnection(cn);
+            if (sqlcn.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Open");
+                sqlcn.Open();
+            }
+            else
+                MessageBox.Show("error");
         }
     }
 }
