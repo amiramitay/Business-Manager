@@ -120,26 +120,44 @@ namespace WpfApp1
                 return;
 
         }
+        bool userCheck = false;
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (UserNameTextBox.Text.Equals("amir"))
+
+            if (userCheck)
             {
-                if (PasswordTextBox.Password.Equals("1234"))
+
+                sqlcn.Open();
+
+                if (PasswordTextBox.Password.Equals(loginDT.Rows[userIndex]["Password"].ToString().Trim()))
                 {
+                    sqlcn.Close();
+                    UserNameTextBox.Text = "";
+                    PasswordTextBox.Password = "";
                     isLogin = true;
                     EnableMenus();
                     CustomersBtn.IsChecked = true;
                     mainTabs.Items.Remove(LoginTab);
+                    loginDT.Clear();
                 }
                 else
-                    MessageBox.Show("Not login");
+                {
+                    PasswordLabel.Visibility = Visibility.Visible;
+                }
+
+                sqlcn.Close();
             }
             else
-                MessageBox.Show("Not login");
+            {
+                UserLabel.Visibility = Visibility.Visible;
+                PasswordLabel.Visibility = Visibility.Hidden;
+            }
         }
-
+        DataTable loginDT = new DataTable();
+        int userIndex = 1;
         private void UserNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            UserLabel.Visibility = Visibility.Hidden;
             sqlcn.Open();
 
             string queryString =
@@ -150,25 +168,55 @@ namespace WpfApp1
             cmd = sqlcn.CreateCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = queryString;
-           
-            DataTable dt = new DataTable();
+            // DataTable loginDTt = new DataTable();
             cmd.ExecuteNonQuery();
             SqlDataAdapter ad = new SqlDataAdapter(cmd);
-            ad.Fill(dt);
+            ad.Fill(loginDT);
             string str;
 
             CheckImg.Visibility = Visibility.Hidden;
-            foreach (DataRow dr in dt.Rows)
+
+            for (int i = 0; i < loginDT.Rows.Count; i++)
             {
-                str = dr["User"].ToString().Trim(); //Replace(" ", string.Empty);
+
+                //loginDR = loginDT.Rows[i];
+                str = loginDT.Rows[i]["User"].ToString().Trim();
                 if (UserNameTextBox.Text.Equals(str))
                 {
+                    UserLabel.Visibility = Visibility.Hidden;
                     CheckImg.Visibility = Visibility.Visible;
+                    userCheck = true;
+                    userIndex = i;
                     break;
-                }  
+                }
+                else
+                {
+                    userCheck = false;
+                }
             }
-         
+
+            //
+            //foreach (DataRow dr in dt.Rows)
+            //{
+            //    //str = dr["User"].ToString();
+            //    str = dr["User"].ToString().Trim();//Replace(" ", string.Empty);
+
+            //    if (UserNameTextBox.Text.Equals(str))
+            //    {
+            //        CheckImg.Visibility = Visibility.Visible;
+            //        userCheck = true;
+            //        break;
+            //    }
+            //    else
+            //        userCheck = false;
+            //}
+
             sqlcn.Close();
+        }
+
+        private void PasswordTextBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            PasswordLabel.Visibility = Visibility.Hidden;
         }
 
         private void RegisterBtn_Click(object sender, RoutedEventArgs e)
@@ -530,7 +578,7 @@ namespace WpfApp1
                 sqlcn.Close();
         }
 
-
+ 
     }
        
 }
