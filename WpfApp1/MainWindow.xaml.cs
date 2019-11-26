@@ -140,7 +140,6 @@ namespace WpfApp1
 
         private void UserNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
             sqlcn.Open();
 
             string queryString =
@@ -148,50 +147,27 @@ namespace WpfApp1
             SqlCommand cmd = new SqlCommand(
                   queryString, sqlcn);
 
-            abc.Items.Clear();
             cmd = sqlcn.CreateCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = queryString;
+           
             DataTable dt = new DataTable();
             cmd.ExecuteNonQuery();
             SqlDataAdapter ad = new SqlDataAdapter(cmd);
             ad.Fill(dt);
             string str;
-            int i = 0;
+
             CheckImg.Visibility = Visibility.Hidden;
             foreach (DataRow dr in dt.Rows)
             {
-                str = dr["User"].ToString().Trim();//Replace(" ", string.Empty);
-              //  str.Replace("  ", string.Empty);
-
-
+                str = dr["User"].ToString().Trim(); //Replace(" ", string.Empty);
                 if (UserNameTextBox.Text.Equals(str))
                 {
                     CheckImg.Visibility = Visibility.Visible;
                     break;
                 }  
             }
-
-            //CheckImg.Visibility = Visibility.Hidden;
-            //string[] str = { "amir", "dani", "moshe" };
-            //for (int i = 0; i < str.Length; i++)
-            //{
-            //    if (UserNameTextBox.Text.Equals(str[i]))
-            //    {
-            //        CheckImg.Visibility = Visibility.Visible;
-            //        break;
-            //    }
-
-            //}
-
-
-
-
-            //if (UserNameTextBox.Text.Equals("amir"))
-            //    CheckImg.Visibility = Visibility.Visible;
-            //else
-            //    CheckImg.Visibility = Visibility.Hidden;
-
+         
             sqlcn.Close();
         }
 
