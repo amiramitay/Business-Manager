@@ -142,8 +142,9 @@ namespace WpfApp1
                     user.Password = loginDT.Rows[userIndex]["Password"].ToString().Trim();
                     user.isAdmin= (bool)loginDT.Rows[userIndex]["Admin"];
                     isAdmin = user.isAdmin;
+                    
+                    UpdateTables();
 
-                    sqlcn.Close();
                     UserNameTextBox.Text = "";
                     PasswordTextBox.Password = "";
                     isLogin = true;
@@ -238,8 +239,6 @@ namespace WpfApp1
 
 
 
-
-
           //-------------------//
          //LeftPanel Control--//
         //-------------------//
@@ -251,7 +250,38 @@ namespace WpfApp1
             }
             else
             {
-                MessageBox.Show("Yes");
+                string queryString =
+                        "SELECT * FROM  customers;";
+                SqlCommand cmd = new SqlCommand("INSERT INTO customers " +
+        "( Name, Phone , Email,Join,VIP) " +
+                "VALUES(@name, @phone,@email, @date,@vip)",
+        sqlcn);
+
+                cmd.Parameters.Add("@name", SqlDbType.NVarChar);
+                cmd.Parameters.Add("@phone", SqlDbType.NVarChar);
+                cmd.Parameters.Add("@email", SqlDbType.NVarChar);
+                cmd.Parameters.Add("@date", SqlDbType.Date);
+                cmd.Parameters.Add("@vip", SqlDbType.Bit);
+
+                // set values to parameters from textboxes
+                cmd.Parameters["@name"].Value = "gigi";
+                cmd.Parameters["@phone"].Value ="aaaa";
+                cmd.Parameters["@email"].Value = "bbb";
+                cmd.Parameters["@date"].Value = DateTime.Now;
+                cmd.Parameters["@vip"].Value = false;
+
+                sqlcn.Open();
+             //   int row = cmd.ExecuteNonQuery();
+                sqlcn.Close();
+                //cmd = sqlcn.CreateCommand();
+                //cmd.CommandType = CommandType.Text;
+                //cmd.CommandText = queryString;
+                //DataTable dt = new DataTable();
+                //cmd.ExecuteNonQuery();
+                //SqlDataAdapter ad = new SqlDataAdapter(cmd);
+                //ad.Fill(dt);
+                //CustomersInfoTable.ItemsSource = dt.DefaultView;
+                //MessageBox.Show("Yes");
             }
         }
         private void EditBtn_Click(object sender, RoutedEventArgs e)
@@ -410,7 +440,7 @@ namespace WpfApp1
 
           //--------------------//
          //Right Panel Control //
-        //Calander Control    //
+        //Calander Control----//
        //--------------------//
 
         private void MainCal_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
@@ -596,7 +626,78 @@ namespace WpfApp1
                
         }
 
-     
+         //--------------//
+        //Tables Control//
+       //--------------//
+
+        public void UpdateTables()
+        {
+            UpdateCustomersTables();
+        }
+
+        public void UpdateCustomersTables()
+        {
+            
+            string queryString =
+                "SELECT * FROM  customers;";
+            SqlCommand cmd = new SqlCommand(
+                  queryString, sqlcn);
+
+            cmd = sqlcn.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = queryString;
+            DataTable dt = new DataTable();
+            cmd.ExecuteNonQuery();
+            SqlDataAdapter ad = new SqlDataAdapter(cmd);
+            ad.Fill(dt);
+            CustomersInfoTable.ItemsSource = dt.DefaultView;
+        
+            //foreach (var column in CustomersInfoTable.Columns)
+            //{
+            //    column.MinWidth = column.ActualWidth;
+            //    column.Width = new DataGridLength(30);
+            //}
+
+
+
+            /*
+            for (int i = 0; i < loginDT.Rows.Count; i++)
+            {
+
+                //loginDR = loginDT.Rows[i];
+                str = loginDT.Rows[i]["User"].ToString().Trim();
+                if (UserNameTextBox.Text.Equals(str))
+                {
+                    UserLabel.Visibility = Visibility.Hidden;
+                    CheckImg.Visibility = Visibility.Visible;
+                    userCheck = true;
+                    userIndex = i;
+                    break;
+                }
+                else
+                {
+                    userCheck = false;
+                }
+            }
+            */
+            //
+            //foreach (DataRow dr in dt.Rows)
+            //{
+            //    //str = dr["User"].ToString();
+            //    str = dr["User"].ToString().Trim();//Replace(" ", string.Empty);
+
+            //    if (UserNameTextBox.Text.Equals(str))
+            //    {
+            //        CheckImg.Visibility = Visibility.Visible;
+            //        userCheck = true;
+            //        break;
+            //    }
+            //    else
+            //        userCheck = false;
+            //}
+
+            sqlcn.Close();
+        }
     }
        
 }

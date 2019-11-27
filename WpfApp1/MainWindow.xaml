@@ -123,7 +123,7 @@
         </Menu>
         <Grid HorizontalAlignment="Left" Height="100" Margin="164,128,0,0" VerticalAlignment="Top" Width="0" Grid.Column="1"/>
         <DockPanel x:Name="centerpanel" Height="auto" Width="auto" LastChildFill="true" Margin="155,32,158.333,-0.333" RenderTransformOrigin="-0.14,-0.127" Grid.Column="1" Background="#CCD6DD">
-            <TabControl x:Name="mainTabs" Background="#FF55ACEE" BorderBrush="#FF55ACEE" Margin="0">
+            <TabControl x:Name="mainTabs" Background="#FF55ACEE" BorderBrush="#FF55ACEE" Margin="0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                 <TabItem x:Name="LoginTab" Header="Login" Margin="-5,-5,0.333,0" Background="#CCD6DD">
                     <Grid Background="#FF55ACEE">
                         <Grid Height="500" Margin="50,10" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500">
@@ -171,13 +171,12 @@
                     <Grid>
                         <Grid Height="390" Background="#FFE11818" Margin="0,0,0,0" VerticalAlignment="Top">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="13*"/>
-                                <ColumnDefinition Width="324*"/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
 
-                            <DataGrid CanUserReorderColumns="True" x:Name = "CustomersInfoTable" Width="auto" Height="390" AlternatingRowBackground = "#FFBCCAD6" ItemsSource="{Binding workersInfo}"  CanUserResizeColumns="False" AutoGenerateColumns="False" VerticalAlignment="Top" Margin="0,0,0.334,0" Grid.ColumnSpan="2">
-
+                            <DataGrid CanUserReorderColumns="True" x:Name = "CustomersInfoTable" Width="auto" Height="390" AlternatingRowBackground = "#FFBCCAD6"   CanUserResizeColumns="False" AutoGenerateColumns="True" VerticalAlignment="Top" Margin="0,0,0.333,0" AutomationProperties.IsColumnHeader="True">
+                                <!--                                                            ItemsSource="{Binding workersInfo}"
                                 <DataGrid.Columns>
 
                                     <DataGridTextColumn  Binding="{Binding FullName }" Header="Name" IsReadOnly="True" Width="auto"/>
@@ -185,7 +184,7 @@
                                     <DataGridTextColumn Binding="{Binding Class}" Header="E-mail" IsReadOnly="True" Width="auto"/>
                                     <DataGridCheckBoxColumn Binding="{Binding Role}" Header="Vip" IsReadOnly="True" Width="auto"/>
                                 </DataGrid.Columns>
-
+-->
 
                             </DataGrid>
                         </Grid>

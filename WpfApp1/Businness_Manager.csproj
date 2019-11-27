@@ -81,11 +81,6 @@
     <Compile Include="Order.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Provider.cs" />
-    <Compile Include="systemDataDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>systemDataDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="User.cs" />
     <Compile Include="Worker.cs" />
     <Page Include="MainWindow.xaml">
@@ -126,17 +121,6 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="systemDataDataSet.xsc">
-      <DependentUpon>systemDataDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="systemDataDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>systemDataDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="systemDataDataSet.xss">
-      <DependentUpon>systemDataDataSet.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
