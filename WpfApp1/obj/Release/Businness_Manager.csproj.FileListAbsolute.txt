@@ -16,3 +16,4 @@ C:\Projects\Business-Manager\WpfApp1\obj\Release\WpfApp1.Properties.Resources.re
 C:\Projects\Business-Manager\WpfApp1\obj\Release\Businness_Manager.csproj.GenerateResource.cache
 C:\Projects\Business-Manager\WpfApp1\obj\Release\WpfApp1.exe
 C:\Projects\Business-Manager\WpfApp1\obj\Release\WpfApp1.pdb
+C:\Projects\Business-Manager\WpfApp1\obj\Release\Businness_Manager.csprojAssemblyReference.cache

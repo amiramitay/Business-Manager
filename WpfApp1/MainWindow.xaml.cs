@@ -33,6 +33,7 @@ namespace WpfApp1
         public bool isEventTab = false;
         public string cn = Properties.Settings.Default.systemDataConnectionString;
         SqlConnection sqlcn = new SqlConnection(Properties.Settings.Default.systemDataConnectionString);
+        User user = new User();
 
         public MainWindow()
         {
@@ -82,8 +83,9 @@ namespace WpfApp1
             Customer c = new Customer("amraa", true, "000", "aaa");
             return c;
         }
-
-        //Login Register Control
+          //-----------------------//
+         //Login Register Control //
+        //-----------------------//
         private void EnableMenus()
         {
             foreach (MenuItem i in MainMenu.Items)
@@ -98,6 +100,10 @@ namespace WpfApp1
             {
                 if (MessageBox.Show("Are you sure?", "", MessageBoxButton.YesNo).ToString().Equals("Yes"))
                 {
+                    if (sqlcn.State == ConnectionState.Open)
+                        sqlcn.Close();
+                   
+                    isAdmin = false;
                     isLogin = false;
                     foreach (MenuItem i in MainMenu.Items)
                     {
@@ -131,6 +137,12 @@ namespace WpfApp1
 
                 if (PasswordTextBox.Password.Equals(loginDT.Rows[userIndex]["Password"].ToString().Trim()))
                 {
+
+                    user.UserName=loginDT.Rows[userIndex]["User"].ToString().Trim();
+                    user.Password = loginDT.Rows[userIndex]["Password"].ToString().Trim();
+                    user.isAdmin= (bool)loginDT.Rows[userIndex]["Admin"];
+                    isAdmin = user.isAdmin;
+
                     sqlcn.Close();
                     UserNameTextBox.Text = "";
                     PasswordTextBox.Password = "";
@@ -228,8 +240,9 @@ namespace WpfApp1
 
 
 
-
-        //LeftPanel Control
+          //-------------------//
+         //LeftPanel Control--//
+        //-------------------//
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
             if (!isLogin || isEventTab)
@@ -271,11 +284,9 @@ namespace WpfApp1
 
 
 
-
-
-
-
-        //MainTabs Control
+          //----------------//
+         //MainTabs Control//
+        //----------------//
         public void AddAndRemoveTabs(string menuItem)
         {
             switch (menuItem)
@@ -287,6 +298,7 @@ namespace WpfApp1
                     mainTabs.Items.Add(CustomersInfoTab);
                     CustomersInfoTab.IsSelected = true;
                     break;
+
                 case "WorkersBtn":
                     mainTabs.Items.Add(WorkersInfoTab);
                     mainTabs.Items.Remove(SalesTab);
@@ -294,6 +306,7 @@ namespace WpfApp1
                     mainTabs.Items.Remove(CustomersInfoTab);
                     WorkersInfoTab.IsSelected = true;
                     break;
+
                 case "ProviderBtn":
                     mainTabs.Items.Remove(WorkersInfoTab);
                     mainTabs.Items.Remove(SalesTab);
@@ -301,6 +314,7 @@ namespace WpfApp1
                     mainTabs.Items.Remove(CustomersInfoTab);
                     //   WorkersInfoTab.IsSelected = true;
                     break;
+
                 case "SalesBtn":
                     mainTabs.Items.Remove(WorkersInfoTab);
                     mainTabs.Items.Add(SalesTab);
@@ -308,6 +322,7 @@ namespace WpfApp1
                     mainTabs.Items.Remove(CustomersInfoTab);
                     SalesTab.IsSelected = true;
                     break;
+
                 case "SupplyBtn":
                     mainTabs.Items.Remove(WorkersInfoTab);
                     mainTabs.Items.Remove(SalesTab);
@@ -315,6 +330,7 @@ namespace WpfApp1
                     mainTabs.Items.Remove(CustomersInfoTab);
                     // WorkersInfoTab.IsSelected = true;
                     break;
+
                 case "OrdersBtn":
                     mainTabs.Items.Remove(WorkersInfoTab);
                     mainTabs.Items.Remove(SalesTab);
@@ -328,8 +344,9 @@ namespace WpfApp1
 
 
 
-
-        //MainMenu Control
+          //----------------//
+         //MainMenu Control//
+        //----------------//
         public void UncheckMenuItems(string menuItem)
         {
             foreach (MenuItem i in MainMenu.Items)
@@ -391,9 +408,11 @@ namespace WpfApp1
         {
         }
 
+          //--------------------//
+         //Right Panel Control //
+        //Calander Control    //
+       //--------------------//
 
-        //Right Panel Control
-        //Calander Control
         private void MainCal_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             if (!isLogin)
@@ -407,8 +426,10 @@ namespace WpfApp1
         }
         Event newEvent = new Event();
         int selectedIndex = 0;
-
-        //New Event Control
+        
+          //-----------------//
+         //New Event Control//
+        //-----------------//
         private void NewEventBtn_Click(object sender, RoutedEventArgs e)
         {
             if (!isLogin)
@@ -491,8 +512,6 @@ namespace WpfApp1
                         DateValidateLabel.Content = "Please select date";
                         TitleValidateLabel.Visibility = Visibility.Hidden;
                     }
-
-
                 }
             }
             else
@@ -523,8 +542,9 @@ namespace WpfApp1
                 DateValidateLabel.Visibility = Visibility.Hidden;
         }
 
-
-        //DB Control
+         //----------//
+        //DB Control//
+       //----------//
         private void MainForm_Loaded(object sender, RoutedEventArgs e)
         {
             LoadDB();
@@ -564,21 +584,19 @@ namespace WpfApp1
 
             }
 
-
-            //foreach (DataColumn dc in dt.Columns)
-            //    abc.Items.Add(dt.ToString());
-
+           
             sqlcn.Close();
 
         }
 
         private void MainForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (sqlcn.State==ConnectionState.Open)
+            if (sqlcn.State == ConnectionState.Open)
                 sqlcn.Close();
+               
         }
 
- 
+     
     }
        
 }

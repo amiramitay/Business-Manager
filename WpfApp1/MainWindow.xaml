@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="Business Manager" Height="600" Width="1000" Background="White"  MinWidth="800" MinHeight="600"
-        Icon="./img/icon.png" Loaded="MainForm_Loaded"
+        Icon="./img/icon.png" Loaded="MainForm_Loaded" Closing="MainForm_Closing"
         >
     <Grid Background="#FF8D8080" >
 
@@ -158,8 +158,8 @@
                                     <DropShadowEffect/>
                                 </Image.Effect>
                             </Image>
-                            <Label x:Name="UserLabel" Content="* User not found" HorizontalAlignment="Left" Margin="232,196,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.298,-2.795" Foreground="Red" Visibility="Hidden"/>
-                            <Label x:Name="PasswordLabel" Content="* Wrong password" HorizontalAlignment="Left" Margin="232,247,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.298,-2.795" Foreground="Red" Visibility="Hidden"/>
+                            <Label x:Name="UserLabel" Content="* User not found" Margin="232,196,170,0" VerticalAlignment="Top" RenderTransformOrigin="0.298,-2.795" Foreground="Red" Visibility="Hidden"/>
+                            <Label x:Name="PasswordLabel" Content="* Wrong password" Margin="232,247,160,0" VerticalAlignment="Top" RenderTransformOrigin="0.298,-2.795" Foreground="Red" Visibility="Hidden"/>
                         </Grid>
 
 
