@@ -45,7 +45,7 @@ namespace WpfApp1
             mainTabs.Items.Remove(CustomersInfoTab);
             mainTabs.Items.Remove(NewEventTab);
 
-            WorkerInfoTable.RowHeaderWidth = 0;
+            WorkerInfoTable.RowHeaderWidth = 0; //?????
             workersInfo = new List<Worker>();
 
             Worker a = new Worker();
@@ -76,15 +76,17 @@ namespace WpfApp1
             e.When = new DateTime(2019, 11, 23).Date;
             MainCal.SelectedDate = new DateTime(2019, 11, 23).Date;
 
-
         }
         public Customer createNewCustomer()
         {
             Customer c = new Customer("amraa", true, "000", "aaa");
             return c;
         }
-          //-----------------------//
-         //Login Register Control //
+
+
+
+        //-----------------------//
+        //Login Register Control //
         //-----------------------//
         private void EnableMenus()
         {
@@ -102,7 +104,7 @@ namespace WpfApp1
                 {
                     if (sqlcn.State == ConnectionState.Open)
                         sqlcn.Close();
-                   
+
                     isAdmin = false;
                     isLogin = false;
                     foreach (MenuItem i in MainMenu.Items)
@@ -132,17 +134,17 @@ namespace WpfApp1
 
             if (userCheck)
             {
-
-                sqlcn.Open();
+                if (sqlcn.State != ConnectionState.Open)
+                    sqlcn.Open();
 
                 if (PasswordTextBox.Password.Equals(loginDT.Rows[userIndex]["Password"].ToString().Trim()))
                 {
 
-                    user.UserName=loginDT.Rows[userIndex]["User"].ToString().Trim();
+                    user.UserName = loginDT.Rows[userIndex]["User"].ToString().Trim();
                     user.Password = loginDT.Rows[userIndex]["Password"].ToString().Trim();
-                    user.isAdmin= (bool)loginDT.Rows[userIndex]["Admin"];
+                    user.isAdmin = (bool)loginDT.Rows[userIndex]["Admin"];
                     isAdmin = user.isAdmin;
-                    
+                    sqlcn.Close();
                     UpdateTables();
 
                     UserNameTextBox.Text = "";
@@ -171,7 +173,8 @@ namespace WpfApp1
         private void UserNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             UserLabel.Visibility = Visibility.Hidden;
-            sqlcn.Open();
+            if (sqlcn.State != ConnectionState.Open)
+                sqlcn.Open();
 
             string queryString =
                 "SELECT * FROM  users;";
@@ -181,8 +184,8 @@ namespace WpfApp1
             cmd = sqlcn.CreateCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = queryString;
-            // DataTable loginDTt = new DataTable();
             cmd.ExecuteNonQuery();
+           
             SqlDataAdapter ad = new SqlDataAdapter(cmd);
             ad.Fill(loginDT);
             string str;
@@ -192,7 +195,6 @@ namespace WpfApp1
             for (int i = 0; i < loginDT.Rows.Count; i++)
             {
 
-                //loginDR = loginDT.Rows[i];
                 str = loginDT.Rows[i]["User"].ToString().Trim();
                 if (UserNameTextBox.Text.Equals(str))
                 {
@@ -239,8 +241,8 @@ namespace WpfApp1
 
 
 
-          //-------------------//
-         //LeftPanel Control--//
+        //-------------------//
+        //LeftPanel Control--//
         //-------------------//
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -250,29 +252,30 @@ namespace WpfApp1
             }
             else
             {
-                string queryString =
-                        "SELECT * FROM  customers;";
-                SqlCommand cmd = new SqlCommand("INSERT INTO customers " +
-        "( Name, Phone , Email,Join,VIP) " +
-                "VALUES(@name, @phone,@email, @date,@vip)",
-        sqlcn);
+                sqlcn.Open();
+                string queryString = "INSERT INTO customers " + "( Name , Phone , Email , Join , VIP)" +
+                "VALUES(@name , @phone, @email, @join , @vip)";
+                SqlCommand cmd = new SqlCommand(queryString,sqlcn);
 
                 cmd.Parameters.Add("@name", SqlDbType.NVarChar);
                 cmd.Parameters.Add("@phone", SqlDbType.NVarChar);
                 cmd.Parameters.Add("@email", SqlDbType.NVarChar);
-                cmd.Parameters.Add("@date", SqlDbType.Date);
+                cmd.Parameters.Add("@join", SqlDbType.Date);
                 cmd.Parameters.Add("@vip", SqlDbType.Bit);
 
                 // set values to parameters from textboxes
                 cmd.Parameters["@name"].Value = "gigi";
-                cmd.Parameters["@phone"].Value ="aaaa";
+                cmd.Parameters["@phone"].Value = "aaaa";
                 cmd.Parameters["@email"].Value = "bbb";
-                cmd.Parameters["@date"].Value = DateTime.Now;
+                cmd.Parameters["@join"].Value ="5/5/2017";
                 cmd.Parameters["@vip"].Value = false;
+                string str= cmd.Parameters["@email"].Value.ToString();
 
-                sqlcn.Open();
-             //   int row = cmd.ExecuteNonQuery();
+
+                cmd.ExecuteNonQuery();
+                //   int row = cmd.ExecuteNonQuery();
                 sqlcn.Close();
+                UpdateCustomersTables();
                 //cmd = sqlcn.CreateCommand();
                 //cmd.CommandType = CommandType.Text;
                 //cmd.CommandText = queryString;
@@ -314,14 +317,15 @@ namespace WpfApp1
 
 
 
-          //----------------//
-         //MainTabs Control//
+        //----------------//
+        //MainTabs Control//
         //----------------//
         public void AddAndRemoveTabs(string menuItem)
         {
             switch (menuItem)
             {
                 case "CustomersBtn":
+                    mainTabs.Items.Remove(ProvidersInfoTab);
                     mainTabs.Items.Remove(WorkersInfoTab);
                     mainTabs.Items.Remove(SalesTab);
                     mainTabs.Items.Remove(WorkersHoursTab);
@@ -330,6 +334,7 @@ namespace WpfApp1
                     break;
 
                 case "WorkersBtn":
+                    mainTabs.Items.Remove(ProvidersInfoTab);
                     mainTabs.Items.Add(WorkersInfoTab);
                     mainTabs.Items.Remove(SalesTab);
                     mainTabs.Items.Add(WorkersHoursTab);
@@ -342,10 +347,12 @@ namespace WpfApp1
                     mainTabs.Items.Remove(SalesTab);
                     mainTabs.Items.Remove(WorkersHoursTab);
                     mainTabs.Items.Remove(CustomersInfoTab);
-                    //   WorkersInfoTab.IsSelected = true;
+                    mainTabs.Items.Add(ProvidersInfoTab);
+                    ProvidersInfoTab.IsSelected = true;
                     break;
 
                 case "SalesBtn":
+                    mainTabs.Items.Remove(ProvidersInfoTab);
                     mainTabs.Items.Remove(WorkersInfoTab);
                     mainTabs.Items.Add(SalesTab);
                     mainTabs.Items.Remove(WorkersHoursTab);
@@ -354,6 +361,7 @@ namespace WpfApp1
                     break;
 
                 case "SupplyBtn":
+                    mainTabs.Items.Remove(ProvidersInfoTab);
                     mainTabs.Items.Remove(WorkersInfoTab);
                     mainTabs.Items.Remove(SalesTab);
                     mainTabs.Items.Remove(WorkersHoursTab);
@@ -362,6 +370,7 @@ namespace WpfApp1
                     break;
 
                 case "OrdersBtn":
+                    mainTabs.Items.Remove(ProvidersInfoTab);
                     mainTabs.Items.Remove(WorkersInfoTab);
                     mainTabs.Items.Remove(SalesTab);
                     mainTabs.Items.Remove(WorkersHoursTab);
@@ -374,8 +383,8 @@ namespace WpfApp1
 
 
 
-          //----------------//
-         //MainMenu Control//
+        //----------------//
+        //MainMenu Control//
         //----------------//
         public void UncheckMenuItems(string menuItem)
         {
@@ -426,6 +435,7 @@ namespace WpfApp1
         }
         private void ProviderBtn_Unchecked(object sender, RoutedEventArgs e)
         {
+            mainTabs.Items.Remove(ProvidersInfoTab);
         }
         private void SalesBtn_Unchecked(object sender, RoutedEventArgs e)
         {
@@ -438,10 +448,10 @@ namespace WpfApp1
         {
         }
 
-          //--------------------//
-         //Right Panel Control //
+        //--------------------//
+        //Right Panel Control //
         //Calander Control----//
-       //--------------------//
+        //--------------------//
 
         private void MainCal_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -456,9 +466,9 @@ namespace WpfApp1
         }
         Event newEvent = new Event();
         int selectedIndex = 0;
-        
-          //-----------------//
-         //New Event Control//
+
+        //-----------------//
+        //New Event Control//
         //-----------------//
         private void NewEventBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -572,28 +582,26 @@ namespace WpfApp1
                 DateValidateLabel.Visibility = Visibility.Hidden;
         }
 
-         //----------//
+        //----------//
         //DB Control//
-       //----------//
+        //----------//
         private void MainForm_Loaded(object sender, RoutedEventArgs e)
         {
             LoadDB();
         }
         public void LoadDB()
         {
-           
+
             if (sqlcn.State != ConnectionState.Open)
             {
-             //   MessageBox.Show("Open");
+                //   MessageBox.Show("Open");
                 sqlcn.Open();
             }
             else
                 MessageBox.Show("error");
             DataSet ds = new DataSet();
-            string queryString =
-                "SELECT * FROM  users;";
-            SqlCommand cmd = new SqlCommand(
-                  queryString, sqlcn);
+            string queryString = "SELECT * FROM  users;";
+            SqlCommand cmd = new SqlCommand(queryString, sqlcn);
 
             abc.Items.Clear();
             cmd = sqlcn.CreateCommand();
@@ -610,94 +618,61 @@ namespace WpfApp1
                 abc.Items.Add(dr["User"].ToString());
                 abc.Items.Add(dr["Password"].ToString());
                 abc.Items.Add(dr["Admin"].ToString());
-
-
             }
-
-           
             sqlcn.Close();
-
         }
 
         private void MainForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (sqlcn.State == ConnectionState.Open)
                 sqlcn.Close();
-               
         }
-
-         //--------------//
+        //--------------//
         //Tables Control//
-       //--------------//
+        //--------------//
 
         public void UpdateTables()
         {
             UpdateCustomersTables();
+            UpdateProviderTables();
         }
 
         public void UpdateCustomersTables()
         {
-            
-            string queryString =
-                "SELECT * FROM  customers;";
-            SqlCommand cmd = new SqlCommand(
-                  queryString, sqlcn);
+            DataTable dt = new DataTable();
+            string queryString = "SELECT * FROM  customers;";
+            SelectFromDB(queryString, dt);
+            CustomersInfoTable.ItemsSource = dt.DefaultView; 
+        }
+
+        public void UpdateProviderTables()
+        {
+            DataTable dt = new DataTable();
+            string queryString =  "SELECT * FROM  providers;";
+            SelectFromDB(queryString,dt);
+            ProvidersInfoTable.ItemsSource = dt.DefaultView;
+        }
+         //--------------------//
+        //DB Commands Control //
+       //--------------------//
+
+
+        public void SelectFromDB(string queryString, DataTable dt)
+        {
+            if (sqlcn.State != ConnectionState.Open)
+                sqlcn.Open();
+            SqlCommand cmd = new SqlCommand(queryString, sqlcn);
 
             cmd = sqlcn.CreateCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = queryString;
-            DataTable dt = new DataTable();
             cmd.ExecuteNonQuery();
             SqlDataAdapter ad = new SqlDataAdapter(cmd);
             ad.Fill(dt);
-            CustomersInfoTable.ItemsSource = dt.DefaultView;
-        
-            //foreach (var column in CustomersInfoTable.Columns)
-            //{
-            //    column.MinWidth = column.ActualWidth;
-            //    column.Width = new DataGridLength(30);
-            //}
-
-
-
-            /*
-            for (int i = 0; i < loginDT.Rows.Count; i++)
-            {
-
-                //loginDR = loginDT.Rows[i];
-                str = loginDT.Rows[i]["User"].ToString().Trim();
-                if (UserNameTextBox.Text.Equals(str))
-                {
-                    UserLabel.Visibility = Visibility.Hidden;
-                    CheckImg.Visibility = Visibility.Visible;
-                    userCheck = true;
-                    userIndex = i;
-                    break;
-                }
-                else
-                {
-                    userCheck = false;
-                }
-            }
-            */
-            //
-            //foreach (DataRow dr in dt.Rows)
-            //{
-            //    //str = dr["User"].ToString();
-            //    str = dr["User"].ToString().Trim();//Replace(" ", string.Empty);
-
-            //    if (UserNameTextBox.Text.Equals(str))
-            //    {
-            //        CheckImg.Visibility = Visibility.Visible;
-            //        userCheck = true;
-            //        break;
-            //    }
-            //    else
-            //        userCheck = false;
-            //}
-
             sqlcn.Close();
         }
+
+
     }
-       
+
 }

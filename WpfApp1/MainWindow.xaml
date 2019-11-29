@@ -309,6 +309,33 @@
 
                     </Grid>
                 </TabItem>
+                <TabItem x:Name="ProvidersInfoTab" Header="Providers Info" Margin="-5,-5,0.333,0" Background="#CCD6DD" >
+                    <Grid>
+                        <Grid Height="390" Background="#FFE11818" Margin="0,0,0,0" VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+
+                            <DataGrid CanUserReorderColumns="True" x:Name = "ProvidersInfoTable" Width="auto" Height="390" AlternatingRowBackground = "#FFBCCAD6"   CanUserResizeColumns="False" AutoGenerateColumns="True" VerticalAlignment="Top" Margin="0,0,0.333,0" AutomationProperties.IsColumnHeader="True">
+                                <!--                                                            ItemsSource="{Binding workersInfo}"
+                                <DataGrid.Columns>
+
+                                    <DataGridTextColumn  Binding="{Binding FullName }" Header="Name" IsReadOnly="True" Width="auto"/>
+                                    <DataGridTextColumn Binding="{Binding CalcAge}" Header="Telephone" IsReadOnly="True" Width="auto"/>
+                                    <DataGridTextColumn Binding="{Binding Class}" Header="E-mail" IsReadOnly="True" Width="auto"/>
+                                    <DataGridCheckBoxColumn Binding="{Binding Role}" Header="Vip" IsReadOnly="True" Width="auto"/>
+                                </DataGrid.Columns>
+-->
+
+                            </DataGrid>
+                        </Grid>
+                        <Label x:Name="lbb_Copy1" Content="Label" Height="35" VerticalAlignment="Top" Margin="255,434,0,0" HorizontalAlignment="Left" Width="154"/>
+
+
+
+                    </Grid>
+                </TabItem>
 
 
 
