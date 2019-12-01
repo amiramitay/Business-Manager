@@ -34,7 +34,7 @@ namespace WpfApp1
         public string cn = Properties.Settings.Default.systemDataConnectionString;
         SqlConnection sqlcn = new SqlConnection(Properties.Settings.Default.systemDataConnectionString);
         User user = new User();
-
+       
         public MainWindow()
         {
             InitializeComponent();
@@ -44,7 +44,8 @@ namespace WpfApp1
             mainTabs.Items.Remove(WorkersHoursTab);
             mainTabs.Items.Remove(CustomersInfoTab);
             mainTabs.Items.Remove(NewEventTab);
-
+            mainTabs.Items.Remove(ProvidersInfoTab);
+            mainTabs.Items.Remove(NewProviderTab);
             WorkerInfoTable.RowHeaderWidth = 0; //?????
             workersInfo = new List<Worker>();
 
@@ -185,7 +186,7 @@ namespace WpfApp1
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = queryString;
             cmd.ExecuteNonQuery();
-           
+
             SqlDataAdapter ad = new SqlDataAdapter(cmd);
             ad.Fill(loginDT);
             string str;
@@ -252,39 +253,72 @@ namespace WpfApp1
             }
             else
             {
-                sqlcn.Open();
-                string queryString = "INSERT INTO customers " + "( Name , Phone , Email , Join , VIP)" +
-                "VALUES(@name , @phone, @email, @join , @vip)";
-                SqlCommand cmd = new SqlCommand(queryString,sqlcn);
-
-                cmd.Parameters.Add("@name", SqlDbType.NVarChar);
-                cmd.Parameters.Add("@phone", SqlDbType.NVarChar);
-                cmd.Parameters.Add("@email", SqlDbType.NVarChar);
-                cmd.Parameters.Add("@join", SqlDbType.Date);
-                cmd.Parameters.Add("@vip", SqlDbType.Bit);
-
+                // sqlcn.Open();
+                // string queryString = "INSERT INTO customers " + "( Name , Phone , Email , Join , VIP)" +
+                // "VALUES ('am' , 'am','dd', 2019-1-1 , 'true')";
+                // SqlCommand cmd = new SqlCommand(queryString, sqlcn);
+                // string queryString = "INSERT INTO users (User,Password,Admin) VALUES (@user,@password,@admin)";
+                // SqlCommand cmd = new SqlCommand(queryString, sqlcn);
+                // cmd.Parameters.Add("@user", SqlDbType.NVarChar);
+                // cmd.Parameters.Add("@password", SqlDbType.NVarChar);
+                // cmd.Parameters.Add("@admin", SqlDbType.Bit);
+                // cmd.Parameters.Add("@join", SqlDbType.Date);
+                // cmd.Parameters.Add("@vip", SqlDbType.Bit);
+                // cmd.Parameters.AddWithValue("@user", "dani");
+                // cmd.Parameters.AddWithValue("@password", "dani");
+                // cmd.Parameters.AddWithValue("@admin", false);
                 // set values to parameters from textboxes
-                cmd.Parameters["@name"].Value = "gigi";
-                cmd.Parameters["@phone"].Value = "aaaa";
-                cmd.Parameters["@email"].Value = "bbb";
-                cmd.Parameters["@join"].Value ="5/5/2017";
-                cmd.Parameters["@vip"].Value = false;
-                string str= cmd.Parameters["@email"].Value.ToString();
+                //cmd.Parameters["@user"].Value = "gigi";
+                // cmd.Parameters["@password"].Value = "aaaa";
+                // cmd.Parameters["@email"].Value = "bbb";
+                // cmd.Parameters["@join"].Value = "2017/5/5";
+                // cmd.Parameters["@admin"].Value = false;
+                // string str = cmd.Parameters["@email"].Value.ToString();
+                // cmd.CommandType = CommandType.Text;
+
+                // cmd.ExecuteNonQuery();
+                // int row = cmd.ExecuteNonQuery();
+                // sqlcn.Close();
+                // UpdateCustomersTables();
+                // cmd = sqlcn.CreateCommand();
+                // cmd.CommandType = CommandType.Text;
+                // cmd.CommandText = queryString;
+                // DataTable dt = new DataTable();
+                // cmd.ExecuteNonQuery();
+                // SqlDataAdapter ad = new SqlDataAdapter(cmd);
+                // ad.Fill(dt);
+                // CustomersInfoTable.ItemsSource = dt.DefaultView;
+                // MessageBox.Show("Yes");
 
 
-                cmd.ExecuteNonQuery();
-                //   int row = cmd.ExecuteNonQuery();
+
+
+                // create sql connection object.  Be sure to put a valid connection string
+                // create command object with SQL query and link to connection object
+                SqlCommand Cmd = new SqlCommand("INSERT INTO providers " +
+                                              "(Name, Phone, Email) " +
+                                              "VALUES(@Name, @Phone, @Email)", sqlcn);
+
+                // create your parameters
+                //Cmd.Parameters.Add("@Name", SqlDbType.NVarChar);
+                //Cmd.Parameters.Add("@Phone",SqlDbType.NVarChar);
+                //Cmd.Parameters.Add("@Email",SqlDbType.NVarChar);
+
+                Cmd.Parameters.AddWithValue("@Name", "dani");
+                Cmd.Parameters.AddWithValue("@Phone", "dani");
+                Cmd.Parameters.AddWithValue("@Email", "dani");
+
+
+                //Cmd.Parameters["@Name"].Value = "fani";
+                //Cmd.Parameters["@Phone"].Value = "223";
+                //Cmd.Parameters["@Email"].Value = "abc";
+            
+                sqlcn.Open();
+
+                int RowsAffected = Cmd.ExecuteNonQuery();
+
                 sqlcn.Close();
-                UpdateCustomersTables();
-                //cmd = sqlcn.CreateCommand();
-                //cmd.CommandType = CommandType.Text;
-                //cmd.CommandText = queryString;
-                //DataTable dt = new DataTable();
-                //cmd.ExecuteNonQuery();
-                //SqlDataAdapter ad = new SqlDataAdapter(cmd);
-                //ad.Fill(dt);
-                //CustomersInfoTable.ItemsSource = dt.DefaultView;
-                //MessageBox.Show("Yes");
+                UpdateProviderTables();
             }
         }
         private void EditBtn_Click(object sender, RoutedEventArgs e)
@@ -505,7 +539,6 @@ namespace WpfApp1
                 {
                     i.IsChecked = false;
                     i.IsChecked = true;
-
                 }
             }
 
@@ -642,19 +675,19 @@ namespace WpfApp1
             DataTable dt = new DataTable();
             string queryString = "SELECT * FROM  customers;";
             SelectFromDB(queryString, dt);
-            CustomersInfoTable.ItemsSource = dt.DefaultView; 
+            CustomersInfoTable.ItemsSource = dt.DefaultView;
         }
 
         public void UpdateProviderTables()
         {
             DataTable dt = new DataTable();
-            string queryString =  "SELECT * FROM  providers;";
-            SelectFromDB(queryString,dt);
+            string queryString = "SELECT * FROM  providers;";
+            SelectFromDB(queryString, dt);
             ProvidersInfoTable.ItemsSource = dt.DefaultView;
         }
-         //--------------------//
+        //--------------------//
         //DB Commands Control //
-       //--------------------//
+        //--------------------//
 
 
         public void SelectFromDB(string queryString, DataTable dt)

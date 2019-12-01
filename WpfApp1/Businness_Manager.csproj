@@ -184,6 +184,7 @@
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="img\provider.png" />
     <Content Include="systemData.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
