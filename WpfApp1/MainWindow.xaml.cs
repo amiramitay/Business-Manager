@@ -34,7 +34,7 @@ namespace WpfApp1
         public string cn = Properties.Settings.Default.systemDataConnectionString;
         SqlConnection sqlcn = new SqlConnection(Properties.Settings.Default.systemDataConnectionString);
         User user = new User();
-       
+
         public MainWindow()
         {
             InitializeComponent();
@@ -253,72 +253,32 @@ namespace WpfApp1
             }
             else
             {
-                // sqlcn.Open();
-                // string queryString = "INSERT INTO customers " + "( Name , Phone , Email , Join , VIP)" +
-                // "VALUES ('am' , 'am','dd', 2019-1-1 , 'true')";
-                // SqlCommand cmd = new SqlCommand(queryString, sqlcn);
-                // string queryString = "INSERT INTO users (User,Password,Admin) VALUES (@user,@password,@admin)";
-                // SqlCommand cmd = new SqlCommand(queryString, sqlcn);
-                // cmd.Parameters.Add("@user", SqlDbType.NVarChar);
-                // cmd.Parameters.Add("@password", SqlDbType.NVarChar);
-                // cmd.Parameters.Add("@admin", SqlDbType.Bit);
-                // cmd.Parameters.Add("@join", SqlDbType.Date);
-                // cmd.Parameters.Add("@vip", SqlDbType.Bit);
-                // cmd.Parameters.AddWithValue("@user", "dani");
-                // cmd.Parameters.AddWithValue("@password", "dani");
-                // cmd.Parameters.AddWithValue("@admin", false);
-                // set values to parameters from textboxes
-                //cmd.Parameters["@user"].Value = "gigi";
-                // cmd.Parameters["@password"].Value = "aaaa";
-                // cmd.Parameters["@email"].Value = "bbb";
-                // cmd.Parameters["@join"].Value = "2017/5/5";
-                // cmd.Parameters["@admin"].Value = false;
-                // string str = cmd.Parameters["@email"].Value.ToString();
-                // cmd.CommandType = CommandType.Text;
-
-                // cmd.ExecuteNonQuery();
-                // int row = cmd.ExecuteNonQuery();
-                // sqlcn.Close();
-                // UpdateCustomersTables();
-                // cmd = sqlcn.CreateCommand();
-                // cmd.CommandType = CommandType.Text;
-                // cmd.CommandText = queryString;
-                // DataTable dt = new DataTable();
-                // cmd.ExecuteNonQuery();
-                // SqlDataAdapter ad = new SqlDataAdapter(cmd);
-                // ad.Fill(dt);
-                // CustomersInfoTable.ItemsSource = dt.DefaultView;
-                // MessageBox.Show("Yes");
+                TabItem t = ToWhichTable();
+                if (t != null)
+                {
+                    string s = t.Header.ToString();
+                    switch(s)
+                    {
+                        
+                        case "Providers Info":
+                            {
+                                Provider p = new Provider("yossi", "ben", "aaa");
+                                AddNewProvider(p);
+                                UpdateProviderTables();
+                                break;
+                            }
 
 
+                        default:
+                            return;
+                             
+                            
+                    }
+                   
+                }
 
+                else return;
 
-                // create sql connection object.  Be sure to put a valid connection string
-                // create command object with SQL query and link to connection object
-                SqlCommand Cmd = new SqlCommand("INSERT INTO providers " +
-                                              "(Name, Phone, Email) " +
-                                              "VALUES(@Name, @Phone, @Email)", sqlcn);
-
-                // create your parameters
-                //Cmd.Parameters.Add("@Name", SqlDbType.NVarChar);
-                //Cmd.Parameters.Add("@Phone",SqlDbType.NVarChar);
-                //Cmd.Parameters.Add("@Email",SqlDbType.NVarChar);
-
-                Cmd.Parameters.AddWithValue("@Name", "dani");
-                Cmd.Parameters.AddWithValue("@Phone", "dani");
-                Cmd.Parameters.AddWithValue("@Email", "dani");
-
-
-                //Cmd.Parameters["@Name"].Value = "fani";
-                //Cmd.Parameters["@Phone"].Value = "223";
-                //Cmd.Parameters["@Email"].Value = "abc";
-            
-                sqlcn.Open();
-
-                int RowsAffected = Cmd.ExecuteNonQuery();
-
-                sqlcn.Close();
-                UpdateProviderTables();
             }
         }
         private void EditBtn_Click(object sender, RoutedEventArgs e)
@@ -590,7 +550,7 @@ namespace WpfApp1
             else
             {
                 TitleValidateLabel.Visibility = Visibility.Hidden;
-                if (EventDate.SelectedDate < System.DateTime.Today)
+                if (EventDate.SelectedDate < DateTime.Today)
                 {
                     DateValidateLabel.Content = "Please select future date";
                     DateValidateLabel.Visibility = Visibility.Visible;
@@ -705,7 +665,47 @@ namespace WpfApp1
             sqlcn.Close();
         }
 
+        public TabItem ToWhichTable()
+        {
+            MenuItem menuItem = new MenuItem();
+            foreach (MenuItem m in MainMenu.Items)
+                if (m.IsChecked == true)
+                {
+                    menuItem = m;
+                    break;
+                }
 
+            TabItem tabItem = null; ;
+            foreach (TabItem t in mainTabs.Items)
+            {
+                if (t.IsSelected)
+                {
+                    tabItem = t;
+                    break;
+                }
+            }
+            return tabItem;
+        }
+    
+        public void AddNewProvider(Provider p)
+        {
+            SqlCommand Cmd = new SqlCommand("INSERT INTO providers " + "(Name, Phone, Email) " +
+                                           "VALUES(@Name, @Phone, @Email)", sqlcn);
+
+            Cmd.Parameters.AddWithValue("@Name", "dani");
+            Cmd.Parameters.AddWithValue("@Phone", "dani");
+            Cmd.Parameters.AddWithValue("@Email", "dani");
+
+            sqlcn.Open();
+
+            int RowsAffected = Cmd.ExecuteNonQuery();
+
+            sqlcn.Close();
+        }
+    
+    
+    
     }
+
 
 }
