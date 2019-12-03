@@ -18,6 +18,7 @@ using System.Data.SqlTypes;
 using System.IO;
 using System.Data;
 using System.Configuration;
+using System.Text.RegularExpressions;
 
 namespace WpfApp1
 
@@ -78,17 +79,14 @@ namespace WpfApp1
             MainCal.SelectedDate = new DateTime(2019, 11, 23).Date;
 
         }
-        public Customer createNewCustomer()
-        {
-            Customer c = new Customer("amraa", true, "000", "aaa");
-            return c;
-        }
+       
 
 
 
         //-----------------------//
         //Login Register Control //
         //-----------------------//
+
         private void EnableMenus()
         {
             foreach (MenuItem i in MainMenu.Items)
@@ -169,8 +167,10 @@ namespace WpfApp1
                 PasswordLabel.Visibility = Visibility.Hidden;
             }
         }
+       
         DataTable loginDT = new DataTable();
         int userIndex = 1;
+
         private void UserNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             UserLabel.Visibility = Visibility.Hidden;
@@ -245,6 +245,7 @@ namespace WpfApp1
         //-------------------//
         //LeftPanel Control--//
         //-------------------//
+
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
             if (!isLogin || isEventTab)
@@ -256,29 +257,43 @@ namespace WpfApp1
                 TabItem t = ToWhichTable();
                 if (t != null)
                 {
-                    string s = t.Header.ToString();
-                    switch(s)
+                    string s = t.Name.ToString();
+                    switch (s)
                     {
-                        
-                        case "Providers Info":
+
+                        case "ProvidersInfoTab":
                             {
-                                Provider p = new Provider("yossi", "ben", "aaa");
-                                AddNewProvider(p);
-                                UpdateProviderTables();
+
+                                string name = "dani";
+                                string phone = "054-636-1321";
+                                string email = "aaa@bb.com";
+
+                                if (IsValidPhone(phone) && IsValidEmail(email))
+                                {
+                                    Provider p = createNewProvider(name, email, phone);
+                                    AddNewProvider(p);
+                                    UpdateProviderTables();
+                                }
+
+                                else
+                                    if (!IsValidPhone(phone) && !IsValidEmail(email))
+                                    MessageBox.Show("Wrong phone and email");
+                                else
+                                    if (IsValidPhone(phone))
+                                    MessageBox.Show("Wrong email");
+                                else
+                                    MessageBox.Show("Wrong phone");
+
                                 break;
                             }
 
 
                         default:
                             return;
-                             
-                            
                     }
-                   
                 }
-
-                else return;
-
+                else
+                    return;
             }
         }
         private void EditBtn_Click(object sender, RoutedEventArgs e)
@@ -314,6 +329,7 @@ namespace WpfApp1
         //----------------//
         //MainTabs Control//
         //----------------//
+
         public void AddAndRemoveTabs(string menuItem)
         {
             switch (menuItem)
@@ -380,6 +396,7 @@ namespace WpfApp1
         //----------------//
         //MainMenu Control//
         //----------------//
+
         public void UncheckMenuItems(string menuItem)
         {
             foreach (MenuItem i in MainMenu.Items)
@@ -464,6 +481,7 @@ namespace WpfApp1
         //-----------------//
         //New Event Control//
         //-----------------//
+
         private void NewEventBtn_Click(object sender, RoutedEventArgs e)
         {
             if (!isLogin)
@@ -578,6 +596,7 @@ namespace WpfApp1
         //----------//
         //DB Control//
         //----------//
+
         private void MainForm_Loaded(object sender, RoutedEventArgs e)
         {
             LoadDB();
@@ -620,6 +639,10 @@ namespace WpfApp1
             if (sqlcn.State == ConnectionState.Open)
                 sqlcn.Close();
         }
+
+
+
+
         //--------------//
         //Tables Control//
         //--------------//
@@ -645,10 +668,29 @@ namespace WpfApp1
             SelectFromDB(queryString, dt);
             ProvidersInfoTable.ItemsSource = dt.DefaultView;
         }
+
+
+
+
         //--------------------//
         //DB Commands Control //
         //--------------------//
 
+        public void AddNewProvider(Provider c)
+        {
+            SqlCommand Cmd = new SqlCommand("INSERT INTO providers " + "(Name, Phone, Email) " +
+                                           "VALUES(@Name, @Phone, @Email)", sqlcn);
+
+            Cmd.Parameters.AddWithValue("@Name", c.Name);
+            Cmd.Parameters.AddWithValue("@Phone", c.Phone);
+            Cmd.Parameters.AddWithValue("@Email", c.Email);
+
+            sqlcn.Open();
+
+            int RowsAffected = Cmd.ExecuteNonQuery();
+
+            sqlcn.Close();
+        }
 
         public void SelectFromDB(string queryString, DataTable dt)
         {
@@ -686,25 +728,45 @@ namespace WpfApp1
             }
             return tabItem;
         }
-    
-        public void AddNewProvider(Provider p)
+
+
+         //---------//
+        //Class Use//
+       //---------//
+
+        public Customer createNewCustomer()
         {
-            SqlCommand Cmd = new SqlCommand("INSERT INTO providers " + "(Name, Phone, Email) " +
-                                           "VALUES(@Name, @Phone, @Email)", sqlcn);
-
-            Cmd.Parameters.AddWithValue("@Name", "dani");
-            Cmd.Parameters.AddWithValue("@Phone", "dani");
-            Cmd.Parameters.AddWithValue("@Email", "dani");
-
-            sqlcn.Open();
-
-            int RowsAffected = Cmd.ExecuteNonQuery();
-
-            sqlcn.Close();
+            Customer c = new Customer("amraa", true, "000", "aaa");
+            return c;
         }
-    
-    
-    
+
+
+        public Provider createNewProvider(string name ,string phone , string email)
+        {
+            Provider p = new Provider(name, phone, email);
+            return p;
+        }
+
+
+
+
+
+        //-----------------//
+        //String Validators//
+        //-----------------//
+
+        public static bool IsValidEmail(string email)
+        {
+            Regex rx = new Regex(@"^[-!#$%&'*+/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+/0-9=?A-Z^_a-z{|}~])*@[a-zA-Z](-?[a-zA-Z0-9])*(\.[a-zA-Z](-?[a-zA-Z0-9])*)+$");
+            return rx.IsMatch(email);
+        }
+
+        public static bool IsValidPhone(string phone)
+        {
+            Regex rx = new Regex(@"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}");
+            return rx.IsMatch(phone);
+        }
+
     }
 
 

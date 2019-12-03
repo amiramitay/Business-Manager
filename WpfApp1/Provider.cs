@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp1
 {
-    class Provider
+    public class Provider
     {
         public Provider(string name, string phone, string email)
         {
