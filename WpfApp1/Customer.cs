@@ -15,12 +15,29 @@ namespace WpfApp1
             Email = email;
         }
 
+        public Customer(string name, string phone, DateTime join)
+        {
+            Name = name;
+            Phone = phone;
+            Join = join;
+        }
+
         public Customer(string name, bool vip, string phone, string email)
         {
             Name = name;
             Vip = vip;
             Phone = phone;
             Email = email;
+        }
+
+        public Customer(string name, string phone, string email, DateTime join) : this(name, phone, email)
+        {
+            Join = join;
+        }
+
+        public Customer(string name, bool vip, string phone, string email, DateTime join) : this(name, vip, phone, email)
+        {
+            Join = join;
         }
 
         public string Name { get; set; }

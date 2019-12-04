@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp1
 {
-    class Event
+    public class Event
     {
         public System.DateTime When { get; set; }
         public String Title { get; set; }

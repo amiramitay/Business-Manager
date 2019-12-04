@@ -49,7 +49,8 @@ namespace WpfApp1
             mainTabs.Items.Remove(NewProviderTab);
             WorkerInfoTable.RowHeaderWidth = 0; //?????
             workersInfo = new List<Worker>();
-
+            Window1 window = new Window1();
+            window.Show  ();
             Worker a = new Worker();
             a.FirstName = "Amir";
             a.LastName = "Amitay";
@@ -59,8 +60,7 @@ namespace WpfApp1
 
             Order o = new Order();
 
-            Customer c = createNewCustomer();
-            o.Customer = c;
+
 
             DateTime date = new DateTime(1993, 3, 30).Date;
 
@@ -80,8 +80,6 @@ namespace WpfApp1
 
         }
        
-
-
 
         //-----------------------//
         //Login Register Control //
@@ -241,7 +239,6 @@ namespace WpfApp1
         }
 
 
-
         //-------------------//
         //LeftPanel Control--//
         //-------------------//
@@ -287,6 +284,46 @@ namespace WpfApp1
                                 break;
                             }
 
+                        case "WorkersInfoTab":
+                            {
+
+                                break;   
+                             
+                            }
+
+                        case "CustomersInfoTab":
+                            {
+
+                                string name = "itzik";
+                                string email = "sss@cdsds.com";
+                                string phone = "0546765432";
+                                DateTime join = DateTime.Now;
+
+                                if (IsValidPhone(phone) && IsValidEmail(email))
+                                {
+                                    Customer c = createNewCustomer(name, phone, email, join);
+                                        AddNewCustomer(c);
+                                    UpdateCustomersTables();
+                                }
+
+                                else
+                                    if (!IsValidPhone(phone) && !IsValidEmail(email))
+                                    MessageBox.Show("Wrong phone and email");
+                                else
+                                    if (IsValidPhone(phone))
+                                    MessageBox.Show("Wrong email");
+                                else
+                                    MessageBox.Show("Wrong phone");
+
+                                break;
+
+                            }
+
+                        case "SalesTab" :
+                            {
+                                break;
+                            }
+
 
                         default:
                             return;
@@ -323,7 +360,6 @@ namespace WpfApp1
         {
             Logout();
         }
-
 
 
         //----------------//
@@ -389,8 +425,6 @@ namespace WpfApp1
                     break;
             }
         }
-
-
 
 
         //----------------//
@@ -459,6 +493,7 @@ namespace WpfApp1
         {
         }
 
+
         //--------------------//
         //Right Panel Control //
         //Calander Control----//
@@ -477,6 +512,7 @@ namespace WpfApp1
         }
         Event newEvent = new Event();
         int selectedIndex = 0;
+
 
         //-----------------//
         //New Event Control//
@@ -576,7 +612,7 @@ namespace WpfApp1
                 else
                 {
                     DateValidateLabel.Visibility = Visibility.Hidden;
-                    Event newEvent = new Event();
+                    Event newEvent =  CreateNewEvent();
                     newEvent.Title = EventTitle.Text;
                     newEvent.When = EventDate.SelectedDate.Value;
                     newEvent.Description = EventDescription.Text;
@@ -592,6 +628,7 @@ namespace WpfApp1
             else
                 DateValidateLabel.Visibility = Visibility.Hidden;
         }
+
 
         //----------//
         //DB Control//
@@ -641,8 +678,6 @@ namespace WpfApp1
         }
 
 
-
-
         //--------------//
         //Tables Control//
         //--------------//
@@ -670,8 +705,6 @@ namespace WpfApp1
         }
 
 
-
-
         //--------------------//
         //DB Commands Control //
         //--------------------//
@@ -684,6 +717,39 @@ namespace WpfApp1
             Cmd.Parameters.AddWithValue("@Name", c.Name);
             Cmd.Parameters.AddWithValue("@Phone", c.Phone);
             Cmd.Parameters.AddWithValue("@Email", c.Email);
+
+            sqlcn.Open();
+
+            int RowsAffected = Cmd.ExecuteNonQuery();
+
+            sqlcn.Close();
+        }
+
+        public void AddNewCustomer(Customer c)
+        {
+            SqlCommand Cmd;
+            if (c.Email.Equals(""))
+            {
+                MessageBox.Show(c.Join.Date.ToString());
+                 Cmd = new SqlCommand("INSERT INTO customers " + "(Name, Phone, Join,VIP) " +
+                                                         "VALUES(@Name, @Phone, @Join,@VIP)", sqlcn);
+                Cmd.Parameters.AddWithValue("@Name", c.Name);
+                Cmd.Parameters.AddWithValue("@Phone", c.Phone);
+                Cmd.Parameters.AddWithValue("@Join", c.Join.Date);
+                Cmd.Parameters.AddWithValue("@VIP", false);
+            }
+            else
+            {
+                MessageBox.Show(c.Join.Date.ToString());
+                Cmd = new SqlCommand("INSERT INTO customers " + "(Name, Phone,Email, Join,VIP) " +
+                                            "VALUES(@Name, @Phone,@Email, @Join,@VIP)", sqlcn);
+                Cmd.Parameters.AddWithValue("@Name", c.Name);
+                Cmd.Parameters.AddWithValue("@Phone", c.Phone);
+                Cmd.Parameters.AddWithValue("@Join", c.Join.ToString("yyyy-MM-dd"));
+                Cmd.Parameters.AddWithValue("@VIP", false);
+                Cmd.Parameters.AddWithValue("@Email", c.Email);
+            }
+
 
             sqlcn.Open();
 
@@ -734,9 +800,15 @@ namespace WpfApp1
         //Class Use//
        //---------//
 
-        public Customer createNewCustomer()
+        public Customer createNewCustomer(string name , string phone ,string email , DateTime now)
         {
             Customer c = new Customer("amraa", true, "000", "aaa");
+            c = new Customer(name, phone, email, now);
+            if(!email.Equals("") && email!=null)
+            {
+                IsValidEmail(email);
+                IsValidPhone(phone);
+            }
             return c;
         }
 
@@ -747,8 +819,11 @@ namespace WpfApp1
             return p;
         }
 
-
-
+        public Event CreateNewEvent()
+        {
+            Event e = new Event();
+            return e;
+        }
 
 
         //-----------------//

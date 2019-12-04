@@ -17,3 +17,5 @@ C:\Projects\Business-Manager\WpfApp1\obj\Debug\WpfApp1.Properties.Resources.reso
 C:\Projects\Business-Manager\WpfApp1\obj\Debug\Businness_Manager.csproj.GenerateResource.cache
 C:\Projects\Business-Manager\WpfApp1\obj\Debug\WpfApp1.exe
 C:\Projects\Business-Manager\WpfApp1\obj\Debug\WpfApp1.pdb
+C:\Projects\Business-Manager\WpfApp1\obj\Debug\Window1.g.cs
+C:\Projects\Business-Manager\WpfApp1\obj\Debug\Window1.baml
