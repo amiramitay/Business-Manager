@@ -731,8 +731,8 @@ namespace WpfApp1
             if (c.Email.Equals(""))
             {
                 MessageBox.Show(c.Join.Date.ToString());
-                 Cmd = new SqlCommand("INSERT INTO customers " + "(Name, Phone, Join,VIP) " +
-                                                         "VALUES(@Name, @Phone, @Join,@VIP)", sqlcn);
+                Cmd = new SqlCommand("INSERT INTO customers " + "(Name, Phone, [Join],VIP) " +
+                                                        "VALUES(@Name, @Phone, @Join,@VIP)", sqlcn);
                 Cmd.Parameters.AddWithValue("@Name", c.Name);
                 Cmd.Parameters.AddWithValue("@Phone", c.Phone);
                 Cmd.Parameters.AddWithValue("@Join", c.Join.Date);
@@ -740,12 +740,11 @@ namespace WpfApp1
             }
             else
             {
-                MessageBox.Show(c.Join.Date.ToString());
-                Cmd = new SqlCommand("INSERT INTO customers " + "(Name, Phone,Email, Join,VIP) " +
-                                            "VALUES(@Name, @Phone,@Email, @Join,@VIP)", sqlcn);
+                Cmd = new SqlCommand("INSERT INTO customers" + "(Name, Phone,Email,[Join],VIP) " +
+                                            "VALUES(@Name, @Phone,@Email,@Join,@VIP)", sqlcn);
                 Cmd.Parameters.AddWithValue("@Name", c.Name);
                 Cmd.Parameters.AddWithValue("@Phone", c.Phone);
-                Cmd.Parameters.AddWithValue("@Join", c.Join.ToString("yyyy-MM-dd"));
+                Cmd.Parameters.AddWithValue("@Join", c.Join.Date.ToShortDateString());
                 Cmd.Parameters.AddWithValue("@VIP", false);
                 Cmd.Parameters.AddWithValue("@Email", c.Email);
             }
