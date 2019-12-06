@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="Window1" Height="450" Width="800">
-    <Grid>
+    <!--  <Grid>
+
         <TabControl>
             <TabControl.Template>
                 <ControlTemplate TargetType="{x:Type TabControl}">
@@ -20,7 +21,7 @@
                             <RowDefinition x:Name="RowDefinition1" Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <!--this will do the trick!!!-->
+                     
                         <ToolBar x:Name="HeaderPanel" ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Items}"/>
 
                         <Border x:Name="ContentPanel" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Column="0" KeyboardNavigation.DirectionalNavigation="Contained" Grid.Row="1" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
@@ -103,7 +104,29 @@
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>
-        
 
     </Grid>
+    -->
+    <Grid ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="356.667" />
+            <RowDefinition Height="356.667" />
+
+
+
+            <RowDefinition Height="62"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150*"  />
+            <ColumnDefinition Width="493*" />
+            <ColumnDefinition Width="150*" />
+        </Grid.ColumnDefinitions>
+        <Menu Height="32" Margin="0,-2,0.333,0" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Background="Red"/>
+
+
+
+
+    </Grid>
+
 </Window>
