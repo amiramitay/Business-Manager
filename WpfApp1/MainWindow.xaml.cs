@@ -51,12 +51,12 @@ namespace WpfApp1
             workersInfo = new List<Worker>();
             Window1 window = new Window1();
             window.Show  ();
-            Worker a = new Worker();
-            a.FirstName = "Amir";
-            a.LastName = "Amitay";
-            a.Phone = "0541111111";
-            a.Role = "Manager";
-            a.Class = "Manager";
+            //Worker a = new Worker();
+            //a.FirstName = "Amir";
+            //a.LastName = "Amitay";
+            //a.Phone = "0541111111";
+            //a.Role = "Manager";
+            //a.Class = "Manager";
 
             Order o = new Order();
 
@@ -64,14 +64,14 @@ namespace WpfApp1
 
             DateTime date = new DateTime(1993, 3, 30).Date;
 
-            a.CalcAge();
-            a.DateOfBirth = date.Date;
+            //a.CalcAge();
+            //a.DateOfBirth = date.Date;
 
-            workersInfo.Add(a);
-            WorkerInfoTable.ItemsSource = workersInfo;
+            //workersInfo.Add(a);
+            //WorkerInfoTable.ItemsSource = workersInfo;
 
 
-            UserNameTextBox.Text = "ami";
+            UserNameTextBox.Text = "amir";
             PasswordTextBox.Password = "1234";
 
             Event e = new Event();
@@ -265,7 +265,7 @@ namespace WpfApp1
                                 string phone = "054-636-1321";
                                 string email = "aaa@bb.com";
 
-                                if (IsValidPhone(phone) && IsValidEmail(email))
+                                if ( (IsValidPhone(phone) && IsValidEmail(email)) || (IsValidPhone(phone) && email.Equals("") ) )
                                 {
                                     Provider p = createNewProvider(name, email, phone);
                                     AddNewProvider(p);
@@ -286,9 +286,23 @@ namespace WpfApp1
 
                         case "WorkersInfoTab":
                             {
+                                string fname = "itzik";
+                                string lname = "sason";
+                                string phone = "0546765432";
+                                DateTime join = DateTime.Now;
+                                DateTime b = new DateTime (1977, 1, 18);
+                                char m = 'm';
 
-                                break;   
-                             
+                                if (IsValidPhone(phone))
+                                {
+                                    Worker w = createNewWorker(fname,lname,m,phone,b,"aaa","bbb",DateTime.Now,false,10000);
+                                    AddNewWorker(w);
+                                    UpdateWorkerInfoTables();
+                                }
+                                else
+                                    MessageBox.Show("Wrong phone");
+
+                                break;
                             }
 
                         case "CustomersInfoTab":
@@ -302,7 +316,7 @@ namespace WpfApp1
                                 if (IsValidPhone(phone) && IsValidEmail(email))
                                 {
                                     Customer c = createNewCustomer(name, phone, email, join);
-                                        AddNewCustomer(c);
+                                    AddNewCustomer(c);
                                     UpdateCustomersTables();
                                 }
 
@@ -652,7 +666,7 @@ namespace WpfApp1
             string queryString = "SELECT * FROM  users;";
             SqlCommand cmd = new SqlCommand(queryString, sqlcn);
 
-            abc.Items.Clear();
+         
             cmd = sqlcn.CreateCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = queryString;
@@ -662,12 +676,6 @@ namespace WpfApp1
             ad.Fill(dt);
             //  ad.Fill(ds);
 
-            foreach (DataRow dr in dt.Rows)
-            {
-                abc.Items.Add(dr["User"].ToString());
-                abc.Items.Add(dr["Password"].ToString());
-                abc.Items.Add(dr["Admin"].ToString());
-            }
             sqlcn.Close();
         }
 
@@ -686,6 +694,7 @@ namespace WpfApp1
         {
             UpdateCustomersTables();
             UpdateProviderTables();
+            UpdateWorkerInfoTables();
         }
 
         public void UpdateCustomersTables()
@@ -704,10 +713,27 @@ namespace WpfApp1
             ProvidersInfoTable.ItemsSource = dt.DefaultView;
         }
 
+        public void UpdateWorkerInfoTables()
+        {
+            DataTable dt = new DataTable();
+            string queryString = "SELECT Id,[First Name],[Last Name],Class,Role FROM  workers;";
+            SelectFromDB(queryString, dt);
+            WorkerInfoTable.ItemsSource = dt.DefaultView;
+        }
+
+        public void UpdateWorkersTables()
+        {
+
+        }
+
+
 
         //--------------------//
         //DB Commands Control //
         //--------------------//
+
+
+        //insert into tables
 
         public void AddNewProvider(Provider c)
         {
@@ -730,7 +756,6 @@ namespace WpfApp1
             SqlCommand Cmd;
             if (c.Email.Equals(""))
             {
-                MessageBox.Show(c.Join.Date.ToString());
                 Cmd = new SqlCommand("INSERT INTO customers " + "(Name, Phone, [Join],VIP) " +
                                                         "VALUES(@Name, @Phone, @Join,@VIP)", sqlcn);
                 Cmd.Parameters.AddWithValue("@Name", c.Name);
@@ -756,6 +781,35 @@ namespace WpfApp1
 
             sqlcn.Close();
         }
+
+        public void AddNewWorker(Worker w)
+        {
+            SqlCommand Cmd;
+
+
+            Cmd = new SqlCommand("INSERT INTO workers " + "([First Name], [Last Name], Gender, Class, Role, [Date Of Birth], [Start Work], Wage, isUser) " +
+                                                    "VALUES(@fname, @lname, @gender,@class,@role,@dob,@SW ,@wage,@user)", sqlcn);
+           
+            Cmd.Parameters.AddWithValue("@fname", w.FirstName);
+            Cmd.Parameters.AddWithValue("@lname", w.LastName);
+            Cmd.Parameters.AddWithValue("@gender", w.Gender);
+            Cmd.Parameters.AddWithValue("@class", w.Class);
+            Cmd.Parameters.AddWithValue("@role", w.Role);
+            Cmd.Parameters.AddWithValue("@dob", w.DateOfBirth);
+            Cmd.Parameters.AddWithValue("@SW", w.StartWork);
+            Cmd.Parameters.AddWithValue("@wage", w.Wage);
+            Cmd.Parameters.AddWithValue("@user", w.isUser);
+
+
+            sqlcn.Open();
+
+            int RowsAffected = Cmd.ExecuteNonQuery();
+
+            sqlcn.Close();
+        }
+
+
+        //table selection
 
         public void SelectFromDB(string queryString, DataTable dt)
         {
@@ -795,22 +849,15 @@ namespace WpfApp1
         }
 
 
-         //---------//
+        //---------//
         //Class Use//
-       //---------//
+        //---------//
 
-        public Customer createNewCustomer(string name , string phone ,string email , DateTime now)
+        public Customer createNewCustomer(string name, string phone, string email, DateTime now)
         {
-            Customer c = new Customer("amraa", true, "000", "aaa");
-            c = new Customer(name, phone, email, now);
-            if(!email.Equals("") && email!=null)
-            {
-                IsValidEmail(email);
-                IsValidPhone(phone);
-            }
-            return c;
+            Customer c = new Customer(name, phone, email, now);
+             return c;  
         }
-
 
         public Provider createNewProvider(string name ,string phone , string email)
         {
@@ -822,6 +869,12 @@ namespace WpfApp1
         {
             Event e = new Event();
             return e;
+        }
+
+        public Worker createNewWorker(string fName, string lName, char gender , string phone, DateTime birth, string  c , string role , DateTime now ,bool user , int wage )
+        {
+            Worker w = new Worker( fName, lName,  gender,  phone, birth, c, role, now, user, wage);
+            return w;
         }
 
 

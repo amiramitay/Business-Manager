@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="Window1" Height="450" Width="800">
-    <!--  <Grid>
+    <!--  <Grid >
 
         <TabControl>
             <TabControl.Template>
@@ -107,26 +107,58 @@
 
     </Grid>
     -->
-    <Grid ShowGridLines="True">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
-            <RowDefinition Height="356.667" />
-            <RowDefinition Height="356.667" />
+    <!--<Grid ShowGridLines="True">
+       
 
-
-
-            <RowDefinition Height="62"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150*"  />
-            <ColumnDefinition Width="493*" />
-            <ColumnDefinition Width="150*" />
-        </Grid.ColumnDefinitions>
-        <Menu Height="32" Margin="0,-2,0.333,0" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Background="Red"/>
-
-
-
-
-    </Grid>
+    </Grid>   two sides tab item-->
+    <!--<TabControl Name="tabControl1" Margin="12">
+        <TabControl.Template>
+            <ControlTemplate TargetType="{x:Type TabControl}">
+                <Grid ClipToBounds="True" KeyboardNavigation.TabNavigation="Local" SnapsToDevicePixels="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Name="ColumnDefinition0" Width="*"/>
+                        <ColumnDefinition Name="ColumnDefinition2" Width="0"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Name="RowDefinition0" Height="Auto"/>
+                        <RowDefinition Name="RowDefinition1" Height="*"/>
+                    </Grid.RowDefinitions>
+                    <DockPanel
+                  Name="HeaderPanel"
+                  Grid.Column="0"
+                  Grid.Row="0"
+                  Margin="2,2,2,0"
+                  Panel.ZIndex="1"
+                  IsItemsHost="True"
+                  KeyboardNavigation.TabIndex="1"/>
+                    <Border
+                  Name="ContentPanel"
+                  Grid.Column="0"
+                  Grid.Row="1"
+                  Background="{TemplateBinding Panel.Background}"
+                  BorderBrush="{TemplateBinding Border.BorderBrush}"
+                  BorderThickness="{TemplateBinding Border.BorderThickness}"
+                  KeyboardNavigation.DirectionalNavigation="Contained"
+                  KeyboardNavigation.TabIndex="2"
+                  KeyboardNavigation.TabNavigation="Local">
+                        <ContentPresenter
+                     Name="PART_SelectedContentHost"
+                     Margin="{TemplateBinding Control.Padding}"
+                     Content="{TemplateBinding TabControl.SelectedContent}"
+                     ContentSource="SelectedContent"
+                     ContentStringFormat="{TemplateBinding TabControl.SelectedContentStringFormat}"
+                     ContentTemplate="{TemplateBinding TabControl.SelectedContentTemplate}"
+                     SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"/>
+                    </Border>
+                </Grid>
+            </ControlTemplate>
+        </TabControl.Template>
+        <TabItem Name="tabItem1" Header="tabItem1">
+            <Grid/>
+        </TabItem>
+        <TabItem Name="AboutUs" Width="100" HorizontalAlignment="Right" DockPanel.Dock="Right" Header="About Us">
+            <Grid/>
+        </TabItem>
+    </TabControl>-->
 
 </Window>

@@ -65,10 +65,6 @@
             </Button>
 
 
-
-            <ComboBox x:Name="abc" Width="132" RenderTransformOrigin="0.533,1.532" Margin="-164,132,0,369.667"/>
-
-
         </DockPanel>
 
         <DockPanel x:Name="RightPanel" HorizontalAlignment="Right" Height="auto" Margin="620,26,0,-0.333" Width="173" Grid.Column="1" Background="#FF292F33" Grid.RowSpan="2" Grid.ColumnSpan="2" LastChildFill="False">
@@ -123,8 +119,7 @@
         </Menu>
         <Grid HorizontalAlignment="Left" Height="100" Margin="164,128,0,0" VerticalAlignment="Top" Width="0" Grid.Column="1"/>
         <DockPanel x:Name="centerpanel" Height="auto" Width="auto" LastChildFill="true" Margin="155,32,158.333,-0.333" RenderTransformOrigin="-0.14,-0.127" Grid.Column="1" Background="#CCD6DD">
-            <TabControl x:Name="mainTabs" Background="#FF55ACEE" BorderBrush="#FF55ACEE" Margin="0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-
+            <TabControl x:Name="mainTabs" Background="#FF55ACEE" BorderBrush="#FF55ACEE" Margin="0" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Visible">
 
 
                 <TabItem x:Name="LoginTab" Header="Login" Margin="-5,-5,0.333,0" Background="#CCD6DD">
@@ -192,15 +187,23 @@
                             </DataGrid>
                         </Grid>
 
-                        <!--    <TextBox Height="23" TextWrapping="Wrap" Margin="0,419,443.333,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="120"/>
-                        <Label Content="Name:" Margin="43,419,585.333,0" VerticalAlignment="Top" RenderTransformOrigin="0.202,0.397" FontWeight="Bold" FontFamily="Segoe UI Emoji"/>
-                        <Label Content="Phone:" Margin="43,461,583.333,0" VerticalAlignment="Top" RenderTransformOrigin="0.202,0.397" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
-                        <TextBox Height="23" TextWrapping="Wrap" Margin="110,461,443.333,0" VerticalAlignment="Top"/>
-                        <TextBox Height="23" TextWrapping="Wrap" Margin="323,419,0,0" HorizontalAlignment="Left" Width="120" VerticalAlignment="Top"/>
-                        <Label Content="Email:" HorizontalAlignment="Left" Margin="263,419,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.202,0.397" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
-                        <Label Content="VIP:" HorizontalAlignment="Left" Margin="275,461,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.202,0.397" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
-                        <CheckBox Content="" Margin="323,466,328.333,23"/>
-                        -->
+                        <DockPanel Height="100" Background="#FF533A3A" Margin="140,397,140,13">
+                            <Label Content="Name:"  VerticalAlignment="Top" RenderTransformOrigin="0.202,0.397" FontWeight="Bold" FontFamily="Segoe UI Emoji" Margin="10,10,0,10"/>
+                            <TextBox Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Margin="5,10,0,0" Width="102"/>
+                            <Label Content="Phone:"  VerticalAlignment="Top" RenderTransformOrigin="0.202,0.397" FontFamily="Segoe UI Emoji" FontWeight="Bold" Margin="10,10,0,0"/>
+                            <TextBox Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Margin="5,10,0,0" Width="102"/>
+                            <Label Content="Email:" HorizontalAlignment="Center" RenderTransformOrigin="0.202,0.397" FontFamily="Segoe UI Emoji" FontWeight="Bold" Margin="24,0,0,74" />
+                        </DockPanel>
+                        <!--                        
+                        <Label Content="Name:"  VerticalAlignment="Top" RenderTransformOrigin="0.202,0.397" FontWeight="Bold" FontFamily="Segoe UI Emoji"/>
+                        <Label Content="Phone:"  VerticalAlignment="Top" RenderTransformOrigin="0.202,0.397" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
+                        <TextBox Height="23" TextWrapping="Wrap"  VerticalAlignment="Top"/>
+                        <TextBox Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="120" Margin="0,432,312.333,0"/>
+                        <Label Content="Email:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.202,0.397" FontFamily="Segoe UI Emoji" FontWeight="Bold" Margin="79,417,0,0"/>
+                        <Label Content="VIP:"  VerticalAlignment="Top" RenderTransformOrigin="0.202,0.397" FontFamily="Segoe UI Emoji" FontWeight="Bold" HorizontalAlignment="Right" Width="31"/>
+                        <CheckBox Content=""  HorizontalAlignment="Right" Width="22" Height="510" Margin="0,0,0.333,0" VerticalAlignment="Bottom"/>
+
+-->
 
 
                     </Grid>
@@ -235,18 +238,10 @@
                         <Grid Height="390" Background="#FFE11818" Margin="0,0,0.333,0" VerticalAlignment="Top">
 
 
-                            <DataGrid CanUserReorderColumns="True" x:Name = "WorkerInfoTable" Width="auto" Height="390" AlternatingRowBackground = "#FFBCCAD6" ItemsSource="{Binding workersInfo}"  CanUserResizeColumns="False" AutoGenerateColumns="False" VerticalAlignment="Top" Margin="0">
 
-                                <DataGrid.Columns>
+                                <DataGrid CanUserReorderColumns="True" x:Name = "WorkerInfoTable" Width="auto" Height="390" AlternatingRowBackground = "#FFBCCAD6"   CanUserResizeColumns="False" AutoGenerateColumns="True" VerticalAlignment="Top" Margin="0,0,0.333,0" AutomationProperties.IsColumnHeader="True">
 
-                                    <DataGridTextColumn  Binding="{Binding FullName }" Header="Name" IsReadOnly="True" Width="auto"/>
-                                    <DataGridTextColumn Binding="{Binding CalcAge}" Header="Age" IsReadOnly="True" Width="auto"/>
-                                    <DataGridTextColumn Binding="{Binding Class}" Header="Class" IsReadOnly="True" Width="auto"/>
-                                    <DataGridTextColumn Binding="{Binding Role}" Header="Role" IsReadOnly="True" Width="auto"/>
-                                </DataGrid.Columns>
-
-
-                            </DataGrid>
+                                </DataGrid>
                         </Grid>
 
 
@@ -395,6 +390,8 @@
 
                     </Grid>
                 </TabItem>
+
+
 
 
 
