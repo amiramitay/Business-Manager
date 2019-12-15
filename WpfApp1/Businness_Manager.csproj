@@ -75,9 +75,6 @@
     <Compile Include="Customer.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Item.cs" />
-    <Compile Include="NewEvent.xaml.cs">
-      <DependentUpon>NewEvent.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Order.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Provider.cs" />
@@ -98,10 +95,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="NewEvent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Window1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -74,9 +74,9 @@ namespace WpfApp1
             UserNameTextBox.Text = "amir";
             PasswordTextBox.Password = "1234";
 
-            Event e = new Event();
-            e.When = new DateTime(2019, 11, 23).Date;
-            MainCal.SelectedDate = new DateTime(2019, 11, 23).Date;
+            //Event e = new Event();
+            //e.When = new DateTime(2019, 11, 23).Date;
+            //MainCal.SelectedDate = new DateTime(2019, 11, 23).Date;
 
         }
 
@@ -524,7 +524,7 @@ namespace WpfApp1
             MainCal.SelectedDate = selectedDate;
 
         }
-        Event newEvent = new Event();
+       // Event newEvent = new Event();
         int selectedIndex = 0;
 
 
@@ -627,11 +627,11 @@ namespace WpfApp1
                 else
                 {
                     DateValidateLabel.Visibility = Visibility.Hidden;
-                    Event newEvent = CreateNewEvent();
+                    Event newEvent = CreateNewEvent( EventDate.SelectedDate.Value, EventTitle.Text, EventDescription.Text);
                     newEvent.Title = EventTitle.Text;
                     newEvent.When = EventDate.SelectedDate.Value;
                     newEvent.Description = EventDescription.Text;
-                    CreateNewEvent(newEvent);
+                    AddNewEvent(newEvent);
                     UpdateTestTable();
                     MessageBox.Show("When: " + newEvent.When.ToString() + "\n Title: " + newEvent.Title + "\n Descriptopn: " + newEvent.Description);
                 }
@@ -817,7 +817,7 @@ namespace WpfApp1
             sqlcn.Close();
         }
 
-        public void CreateNewEvent(Event e)
+        public void AddNewEvent(Event e)
         {
             SqlCommand Cmd;
 
@@ -893,9 +893,9 @@ namespace WpfApp1
             return p;
         }
 
-        public Event CreateNewEvent()
+        public Event CreateNewEvent( DateTime date, string title, string desc)
         {
-            Event e = new Event();
+            Event e = new Event(date,title,desc);
             return e;
         }
 
