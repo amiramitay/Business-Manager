@@ -239,9 +239,9 @@
 
 
 
-                                <DataGrid CanUserReorderColumns="True" x:Name = "WorkerInfoTable" Width="auto" Height="390" AlternatingRowBackground = "#FFBCCAD6"   CanUserResizeColumns="False" AutoGenerateColumns="True" VerticalAlignment="Top" Margin="0,0,0.333,0" AutomationProperties.IsColumnHeader="True">
+                            <DataGrid CanUserReorderColumns="True" x:Name = "WorkerInfoTable" Width="auto" Height="390" AlternatingRowBackground = "#FFBCCAD6"   CanUserResizeColumns="False" AutoGenerateColumns="True" VerticalAlignment="Top" Margin="0,0,0.333,0" AutomationProperties.IsColumnHeader="True">
 
-                                </DataGrid>
+                            </DataGrid>
                         </Grid>
 
 
@@ -344,7 +344,7 @@
 
                     </Grid>
                 </TabItem>
-                <TabItem x:Name="NewProviderTab" Header="New Event" Margin="-5,-5,0.333,0" Background="#CCD6DD">
+                <TabItem x:Name="NewProviderTab" Header="New Event" Margin="-5.333,-5,0.333,0" Background="#CCD6DD" Height="25" VerticalAlignment="Top">
                     <Grid Background="#FF55ACEE" Margin="-6,6,6.333,-6">
                         <Grid Height="500" Margin="50,10" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500">
                             <Grid.ColumnDefinitions>
@@ -385,6 +385,22 @@
                         </Grid>
 
 
+
+
+
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="testTab" Header="Workers Hours" Margin="0,-5,0,0" HorizontalAlignment="Right" Width="91" Background="#CCD6DD">
+                    <Grid>
+                        <Grid Height="390" Background="#FFE11818" Margin="0,0,0.333,0" VerticalAlignment="Top">
+
+
+                            <DataGrid CanUserReorderColumns="True" x:Name = "testTable" Width="auto" Height="390" AlternatingRowBackground = "#FFBCCAD6"   CanUserResizeColumns="False" VerticalAlignment="Top" Margin="0">
+
+                                
+
+                            </DataGrid>
+                        </Grid>
 
 
 

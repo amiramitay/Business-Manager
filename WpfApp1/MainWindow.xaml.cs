@@ -50,7 +50,7 @@ namespace WpfApp1
             WorkerInfoTable.RowHeaderWidth = 0; //?????
             workersInfo = new List<Worker>();
             Window1 window = new Window1();
-            window.Show  ();
+            window.Show();
             //Worker a = new Worker();
             //a.FirstName = "Amir";
             //a.LastName = "Amitay";
@@ -79,7 +79,7 @@ namespace WpfApp1
             MainCal.SelectedDate = new DateTime(2019, 11, 23).Date;
 
         }
-       
+
 
         //-----------------------//
         //Login Register Control //
@@ -165,7 +165,7 @@ namespace WpfApp1
                 PasswordLabel.Visibility = Visibility.Hidden;
             }
         }
-       
+
         DataTable loginDT = new DataTable();
         int userIndex = 1;
 
@@ -265,7 +265,7 @@ namespace WpfApp1
                                 string phone = "054-636-1321";
                                 string email = "aaa@bb.com";
 
-                                if ( (IsValidPhone(phone) && IsValidEmail(email)) || (IsValidPhone(phone) && email.Equals("") ) )
+                                if ((IsValidPhone(phone) && IsValidEmail(email)) || (IsValidPhone(phone) && email.Equals("")))
                                 {
                                     Provider p = createNewProvider(name, email, phone);
                                     AddNewProvider(p);
@@ -290,12 +290,12 @@ namespace WpfApp1
                                 string lname = "sason";
                                 string phone = "0546765432";
                                 DateTime join = DateTime.Now;
-                                DateTime b = new DateTime (1977, 1, 18);
+                                DateTime b = new DateTime(1977, 1, 18);
                                 char m = 'm';
 
                                 if (IsValidPhone(phone))
                                 {
-                                    Worker w = createNewWorker(fname,lname,m,phone,b,"aaa","bbb",DateTime.Now,false,10000);
+                                    Worker w = createNewWorker(fname, lname, m, phone, b, "aaa", "bbb", DateTime.Now, false, 10000);
                                     AddNewWorker(w);
                                     UpdateWorkerInfoTables();
                                 }
@@ -333,7 +333,7 @@ namespace WpfApp1
 
                             }
 
-                        case "SalesTab" :
+                        case "SalesTab":
                             {
                                 break;
                             }
@@ -575,6 +575,7 @@ namespace WpfApp1
 
 
             mainTabs.Items.Remove(NewEventTab);
+            mainTabs.Items.Add(testTab);
             mainTabs.SelectedIndex = selectedIndex;
             GroupByBtn.IsEnabled = true;
             SortByBtn.IsEnabled = true;
@@ -626,10 +627,12 @@ namespace WpfApp1
                 else
                 {
                     DateValidateLabel.Visibility = Visibility.Hidden;
-                    Event newEvent =  CreateNewEvent();
+                    Event newEvent = CreateNewEvent();
                     newEvent.Title = EventTitle.Text;
                     newEvent.When = EventDate.SelectedDate.Value;
                     newEvent.Description = EventDescription.Text;
+                    CreateNewEvent(newEvent);
+                    UpdateTestTable();
                     MessageBox.Show("When: " + newEvent.When.ToString() + "\n Title: " + newEvent.Title + "\n Descriptopn: " + newEvent.Description);
                 }
             }
@@ -666,7 +669,7 @@ namespace WpfApp1
             string queryString = "SELECT * FROM  users;";
             SqlCommand cmd = new SqlCommand(queryString, sqlcn);
 
-         
+
             cmd = sqlcn.CreateCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = queryString;
@@ -727,6 +730,14 @@ namespace WpfApp1
         }
 
 
+        public void UpdateTestTable()
+        {
+            DataTable dt = new DataTable();
+            string queryString = "SELECT *  FROM  events;";
+            SelectFromDB(queryString, dt);
+            testTable.ItemsSource = dt.DefaultView;
+        }
+
 
         //--------------------//
         //DB Commands Control //
@@ -786,10 +797,9 @@ namespace WpfApp1
         {
             SqlCommand Cmd;
 
-
             Cmd = new SqlCommand("INSERT INTO workers " + "([First Name], [Last Name], Gender, Class, Role, [Date Of Birth], [Start Work], Wage, isUser) " +
                                                     "VALUES(@fname, @lname, @gender,@class,@role,@dob,@SW ,@wage,@user)", sqlcn);
-           
+
             Cmd.Parameters.AddWithValue("@fname", w.FirstName);
             Cmd.Parameters.AddWithValue("@lname", w.LastName);
             Cmd.Parameters.AddWithValue("@gender", w.Gender);
@@ -800,6 +810,24 @@ namespace WpfApp1
             Cmd.Parameters.AddWithValue("@wage", w.Wage);
             Cmd.Parameters.AddWithValue("@user", w.isUser);
 
+            sqlcn.Open();
+
+            int RowsAffected = Cmd.ExecuteNonQuery();
+
+            sqlcn.Close();
+        }
+
+        public void CreateNewEvent(Event e)
+        {
+            SqlCommand Cmd;
+
+            Cmd = new SqlCommand("INSERT INTO events " + "(Date, [Title], Description, Username) " +
+                                                    "VALUES(@date, @title, @desc,@user)", sqlcn);
+
+            Cmd.Parameters.AddWithValue("@date", e.When.Date.ToShortDateString());
+            Cmd.Parameters.AddWithValue("@title", e.Title);
+            Cmd.Parameters.AddWithValue("@desc", e.Description);
+            Cmd.Parameters.AddWithValue("@user", user.UserName);
 
             sqlcn.Open();
 
@@ -856,10 +884,10 @@ namespace WpfApp1
         public Customer createNewCustomer(string name, string phone, string email, DateTime now)
         {
             Customer c = new Customer(name, phone, email, now);
-             return c;  
+            return c;
         }
 
-        public Provider createNewProvider(string name ,string phone , string email)
+        public Provider createNewProvider(string name, string phone, string email)
         {
             Provider p = new Provider(name, phone, email);
             return p;
@@ -871,9 +899,9 @@ namespace WpfApp1
             return e;
         }
 
-        public Worker createNewWorker(string fName, string lName, char gender , string phone, DateTime birth, string  c , string role , DateTime now ,bool user , int wage )
+        public Worker createNewWorker(string fName, string lName, char gender, string phone, DateTime birth, string c, string role, DateTime now, bool user, int wage)
         {
-            Worker w = new Worker( fName, lName,  gender,  phone, birth, c, role, now, user, wage);
+            Worker w = new Worker(fName, lName, gender, phone, birth, c, role, now, user, wage);
             return w;
         }
 
