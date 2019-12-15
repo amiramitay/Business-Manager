@@ -733,7 +733,7 @@ namespace WpfApp1
         public void UpdateTestTable()
         {
             DataTable dt = new DataTable();
-            string queryString = "SELECT *  FROM  events;";
+            string queryString = "SELECT *  FROM  notes;";
             SelectFromDB(queryString, dt);
             testTable.ItemsSource = dt.DefaultView;
         }
@@ -836,6 +836,24 @@ namespace WpfApp1
             sqlcn.Close();
         }
 
+        public void AddNewNote(Note n)
+        {
+            SqlCommand Cmd;
+
+            Cmd = new SqlCommand("INSERT INTO notes " + "( [Title], Description, Username) " +
+                                                    "VALUES(@title, @desc,@user)", sqlcn);
+
+            Cmd.Parameters.AddWithValue("@title", n.Title);
+            Cmd.Parameters.AddWithValue("@desc", n.Description);
+            Cmd.Parameters.AddWithValue("@user", user.UserName);
+
+            sqlcn.Open();
+
+            int RowsAffected = Cmd.ExecuteNonQuery();
+
+            sqlcn.Close();
+        }
+
 
         //table selection
 
@@ -880,6 +898,7 @@ namespace WpfApp1
         //---------//
         //Class Use//
         //---------//
+
 
         public Customer createNewCustomer(string name, string phone, string email, DateTime now)
         {

@@ -75,6 +75,7 @@
     <Compile Include="Customer.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="Note.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Provider.cs" />
