@@ -59,7 +59,7 @@ namespace WpfApp1
             //a.Class = "Manager";
 
             Order o = new Order();
-
+            
 
 
             DateTime date = new DateTime(1993, 3, 30).Date;
@@ -575,7 +575,7 @@ namespace WpfApp1
 
 
             mainTabs.Items.Remove(NewEventTab);
-            mainTabs.Items.Add(testTab);
+            //mainTabs.Items.Add(testTab);
             mainTabs.SelectedIndex = selectedIndex;
             GroupByBtn.IsEnabled = true;
             SortByBtn.IsEnabled = true;
@@ -855,6 +855,24 @@ namespace WpfApp1
         }
 
 
+        public void AddNewUser(User u)
+        {
+            SqlCommand Cmd;
+
+            Cmd = new SqlCommand("INSERT INTO users " + "( [User], Password, [Admin]) " +
+                                                    "VALUES(@user, @pass,@admin)", sqlcn);
+
+            Cmd.Parameters.AddWithValue("@user", u.UserName);
+            Cmd.Parameters.AddWithValue("@pass", u.Password);
+            Cmd.Parameters.AddWithValue("@admin", u.isAdmin);
+
+            sqlcn.Open();
+
+            int RowsAffected = Cmd.ExecuteNonQuery();
+
+            sqlcn.Close();
+        }
+
         //table selection
 
         public void SelectFromDB(string queryString, DataTable dt)
@@ -902,7 +920,8 @@ namespace WpfApp1
 
         public Customer createNewCustomer(string name, string phone, string email, DateTime now)
         {
-            Customer c = new Customer(name, phone, email, now);
+    
+             Customer  c = new Customer(name, phone, email, now);
             return c;
         }
 
@@ -923,6 +942,20 @@ namespace WpfApp1
             Worker w = new Worker(fName, lName, gender, phone, birth, c, role, now, user, wage);
             return w;
         }
+
+        public User createNewUser(string name,string pass, bool admin)
+        {
+            User u = new User(name, pass, admin);
+            return u;
+        }
+
+        public Item CreateNewItem(string name , string cat , string sn ,int count , double cost)
+        {
+            Item i = new Item(name, cat, sn, count, cost);
+            return i;
+        }
+
+
 
 
         //-----------------//

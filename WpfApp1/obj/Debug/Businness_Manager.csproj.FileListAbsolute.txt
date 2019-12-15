@@ -16,3 +16,4 @@ C:\Projects\Business-Manager\WpfApp1\obj\Debug\WpfApp1.exe
 C:\Projects\Business-Manager\WpfApp1\obj\Debug\WpfApp1.pdb
 C:\Projects\Business-Manager\WpfApp1\obj\Debug\Window1.g.cs
 C:\Projects\Business-Manager\WpfApp1\obj\Debug\Window1.baml
+C:\Projects\Business-Manager\WpfApp1\obj\Debug\Businness_Manager.csprojAssemblyReference.cache
